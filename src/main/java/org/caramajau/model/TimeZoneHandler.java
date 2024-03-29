@@ -20,6 +20,57 @@ public class TimeZoneHandler {
         return allTimeZonesList;
     }
 
+    /*
+    * Categories that exist:
+    * - Africa
+    * - America
+    * - Antarctica
+    * - Arctic
+    * - Asia
+    * - Atlantic
+    * - Australia
+    * - Brazil
+    * - Canada
+    * - Chile
+    * - Etc
+    * - Europe
+    * - Indian
+    * - Mexico
+    * - Pacific
+    * - SystemV
+    * - US
+    * */
+    public static List<String> getAllTimeZonesWithSlash() {
+        Set<String> allTimeZonesSet = ZoneId.getAvailableZoneIds();
+        ArrayList<String> allTimeZonesList = new ArrayList<>();
+        for (String timeZone : allTimeZonesSet) {
+            if (timeZone.contains("/")) {
+                allTimeZonesList.add(timeZone);
+            }
+        }
+        allTimeZonesList.sort(String::compareTo);
+        return allTimeZonesList;
+    }
+
+    public static List<String> getAllTimeZoneAbbreviations() {
+        TimeZoneOffsets[] enumArray = TimeZoneOffsets.values();
+        List<String> allTimeZonesList = new ArrayList<>();
+        for (TimeZoneOffsets offset : enumArray) {
+            allTimeZonesList.add(offset.toString());
+        }
+        return allTimeZonesList;
+    }
+
+    public static String getTimeZoneBasedOnOffset(TimeZoneOffsets offset) {
+        for (String timeZone : ZoneId.getAvailableZoneIds()) {
+            ZoneOffset zoneOffset = ZoneId.of(timeZone).getRules().getOffset(Instant.now());
+            if (zoneOffset.getTotalSeconds() == offset.getOffset() * 3600) {
+                return timeZone;
+            }
+        }
+        throw new IllegalArgumentException("No time zone found with offset " + offset.getOffset());
+    }
+
     public static Order compareTimeZone(String zoneString1, String zoneString2) {
         Instant currentTime = Instant.now();
 

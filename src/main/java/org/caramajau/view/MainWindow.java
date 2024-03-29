@@ -8,6 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.caramajau.model.TimeZoneHandler;
+import org.caramajau.model.TimeZoneOffsets;
 
 import java.net.URL;
 import java.util.List;
@@ -25,8 +26,9 @@ public class MainWindow extends AnchorPane implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         primaryStage.setTitle("Time Zone Checker");
-        List<String> allTimeZonesSet = TimeZoneHandler.getAllTimeZones();
-        ObservableList<String> allTimeZonesList = FXCollections.observableArrayList(allTimeZonesSet);
-        timeChoiceBox.setItems(allTimeZonesList);
+
+        List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviations();
+        ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
+        timeChoiceBox.setItems(allTimeZonesObservableList);
     }
 }
