@@ -6,13 +6,18 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class TimeZoneHandler {
     private TimeZoneHandler() {}
 
-    public static Set<String> getAllTimeZones() {
-        return ZoneId.getAvailableZoneIds();
+    public static List<String> getAllTimeZones() {
+        Set<String> allTimeZonesSet = ZoneId.getAvailableZoneIds();
+        ArrayList<String> allTimeZonesList = new ArrayList<>(allTimeZonesSet);
+        allTimeZonesList.sort(String::compareTo);
+        return allTimeZonesList;
     }
 
     public static Order compareTimeZone(String zoneString1, String zoneString2) {
