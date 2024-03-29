@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 public class MainWindow extends AnchorPane implements Initializable {
     private final Stage primaryStage;
     @FXML
-    ChoiceBox<String> timeChoiceBox;
+    private ChoiceBox<String> timeChoiceBox;
 
     public MainWindow(Stage primaryStage) {
         this.primaryStage = primaryStage;
