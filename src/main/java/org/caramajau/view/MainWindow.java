@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         primaryStage.setTitle("Time Zone Checker");
 
-        List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviations();
+        List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviationsAsString();
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
         timeChoiceBox.setItems(allTimeZonesObservableList);
     }
