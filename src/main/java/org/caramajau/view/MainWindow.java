@@ -8,7 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainWindow extends AnchorPane implements Initializable {
-    private Stage primaryStage;
+    private final Stage primaryStage;
 
     public MainWindow(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -16,6 +16,6 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        primaryStage.setTitle("Time Zone Checker");
     }
 }

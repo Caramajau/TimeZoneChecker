@@ -24,7 +24,6 @@ public class Main extends Application {
             root = loader.load();
 
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Time Zone Checker");
             primaryStage.setScene(scene);
             primaryStage.show();
 
