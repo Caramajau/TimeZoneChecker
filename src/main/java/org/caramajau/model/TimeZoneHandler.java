@@ -20,7 +20,7 @@ public class TimeZoneHandler {
 
     public static String getTimeZoneBasedOnOffset(TimeZoneOffsets offset) {
         for (String timeZone : ZoneId.getAvailableZoneIds()) {
-            ZoneOffset zoneOffset = ZoneId.of(timeZone).getRules().getOffset(Instant.now());
+            ZoneOffset zoneOffset = getZoneOffset(Instant.now(), timeZone);
             if (zoneOffset.getTotalSeconds() == offset.getOffset() * 3600) {
                 return timeZone;
             }

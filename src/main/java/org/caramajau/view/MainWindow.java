@@ -8,7 +8,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.caramajau.model.TimeZoneHandler;
-import org.caramajau.model.TimeZoneOffsets;
 
 import java.net.URL;
 import java.util.List;
