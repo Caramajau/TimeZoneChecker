@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="100.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
@@ -12,9 +13,10 @@
       <Label fx:id="timeZoneLabel" layoutX="168.0" layoutY="16.0" prefHeight="16.0" prefWidth="180.0" text="Choose a time zone" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="16.0" />
       <DatePicker fx:id="datePicker" layoutX="357.0" layoutY="47.0" onAction="#handleDatePickAction" prefWidth="120.0" AnchorPane.leftAnchor="168.0" AnchorPane.topAnchor="44.0" />
       <Label fx:id="selectedDateLabel" layoutX="300.0" layoutY="18.0" maxWidth="174.0" prefHeight="16.0" prefWidth="120.0" text="Choose a date" AnchorPane.leftAnchor="168.0" AnchorPane.topAnchor="16.0" />
-      <Label layoutX="357.0" layoutY="14.0" prefHeight="16.0" prefWidth="144.0" text="Choose a time" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0" />
+      <Label layoutX="357.0" layoutY="14.0" prefHeight="16.0" prefWidth="120.0" text="Choose a time" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0" />
       <Button fx:id="convertButton" layoutX="509.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleConvertButtonAction" text="Convert" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="44.0" />
       <Label layoutX="669.0" layoutY="16.0" prefHeight="17.0" prefWidth="211.0" text="Select to see converted date" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0" />
       <Label fx:id="convertedDateLabel" layoutX="573.0" layoutY="48.0" prefHeight="17.0" prefWidth="180.0" text="&quot;time zone&quot;" />
+      <TextField fx:id="timeTextField" layoutX="16.0" layoutY="44.0" prefHeight="25.0" prefWidth="141.0" promptText="Write hour and minutes" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="44.0" />
    </children>
 </AnchorPane>
