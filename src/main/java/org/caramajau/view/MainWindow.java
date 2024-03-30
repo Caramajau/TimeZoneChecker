@@ -5,12 +5,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.caramajau.model.TimeZoneHandler;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -19,7 +21,11 @@ public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private Label timeZoneLabel;
     @FXML
+    private Label selectedDateLabel;
+    @FXML
     private ChoiceBox<String> timeChoiceBox;
+    @FXML
+    private DatePicker datePicker;
 
     public MainWindow(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -39,5 +45,11 @@ public class MainWindow extends AnchorPane implements Initializable {
     private void handleChoiceBoxAction() {
         String selectedTimeZone = timeChoiceBox.getValue();
         timeZoneLabel.setText("Selected Time Zone: " + selectedTimeZone);
+    }
+
+    @FXML
+    private void handleDatePickAction() {
+        LocalDate selectedDate = datePicker.getValue();
+        selectedDateLabel.setText("Selected Date: " + selectedDate);
     }
 }

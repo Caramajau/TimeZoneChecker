@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -8,5 +9,7 @@
    <children>
       <ChoiceBox fx:id="timeChoiceBox" layoutX="225.0" layoutY="188.0" prefWidth="150.0" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" />
       <Label fx:id="timeZoneLabel" layoutX="225.0" layoutY="140.0" maxWidth="150.0" prefHeight="17.0" prefWidth="150.0" text="Choose a time zone" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" />
+      <DatePicker fx:id="datePicker" layoutX="29.0" layoutY="188.0" onAction="#handleDatePickAction" AnchorPane.leftAnchor="29.0" />
+      <Label fx:id="selectedDateLabel" layoutX="41.0" layoutY="149.0" maxWidth="150.0" prefHeight="17.0" prefWidth="150.0" text="Choose a date" AnchorPane.leftAnchor="41.0" />
    </children>
 </AnchorPane>
