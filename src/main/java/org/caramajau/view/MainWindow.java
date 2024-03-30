@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.caramajau.model.TimeZoneHandler;
@@ -15,6 +16,8 @@ import java.util.ResourceBundle;
 
 public class MainWindow extends AnchorPane implements Initializable {
     private final Stage primaryStage;
+    @FXML
+    private Label timeZoneLabel;
     @FXML
     private ChoiceBox<String> timeChoiceBox;
 
@@ -29,5 +32,12 @@ public class MainWindow extends AnchorPane implements Initializable {
         List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviationsAsString();
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
         timeChoiceBox.setItems(allTimeZonesObservableList);
+        timeChoiceBox.setOnAction(event -> handleChoiceBoxAction());
+    }
+
+    // For some reason the onAction doesn't exist in SceneBuilder
+    private void handleChoiceBoxAction() {
+        String selectedTimeZone = timeChoiceBox.getValue();
+        timeZoneLabel.setText("Selected Time Zone: " + selectedTimeZone);
     }
 }

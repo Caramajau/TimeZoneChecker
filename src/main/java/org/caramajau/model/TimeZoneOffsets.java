@@ -37,4 +37,13 @@ public enum TimeZoneOffsets {
     public String toString() {
         return name() + " (" + offset + ")";
     }
+
+    public static TimeZoneOffsets fromString(String str) {
+        for (TimeZoneOffsets timeZone : TimeZoneOffsets.values()) {
+            if (timeZone.toString().equals(str)) {
+                return timeZone;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant " + TimeZoneOffsets.class.getCanonicalName() + " with toString() " + str);
+    }
 }
