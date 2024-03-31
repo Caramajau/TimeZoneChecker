@@ -72,11 +72,17 @@ public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private void handleTimeTextField() {
         String selectedTimeString = timeTextField.getText();
-        String validFormatTimeString = convertToValidFormat(selectedTimeString);
-        selectedTime = LocalTime.parse(selectedTimeString);
+        try {
+            // Doesn't seem to necessary, but can throw except when
+            // it is not in a valid format according to me.
+            String validFormatTimeString = convertToValidFormat(selectedTimeString);
+            selectedTime = LocalTime.parse(validFormatTimeString);
+        } catch (IllegalArgumentException e) {
+            convertedDateLabel.setText("Write 2 or 4 numbers!");
+        }
     }
 
-    private String convertToValidFormat(String selectedTimeString) {
+    private String convertToValidFormat(String selectedTimeString) throws IllegalArgumentException {
         String timeNumbersString = findTimeNumbersInString(selectedTimeString);
         return createValidFormat(timeNumbersString);
 
@@ -95,7 +101,7 @@ public class MainWindow extends AnchorPane implements Initializable {
         return timeNumbersBuilder.toString();
     }
 
-    private static String createValidFormat(String timeNumbersString) {
+    private static String createValidFormat(String timeNumbersString) throws IllegalArgumentException {
         return switch (timeNumbersString.length()) {
             case 2 -> timeNumbersString + ":00";
             case 4 -> timeNumbersString.substring(0, 2) + ":" + timeNumbersString.substring(2, 4);
@@ -106,7 +112,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private void handleConvertButtonAction() {
         if (!selectedTimeZone.equals(NO_SELECTED_TIME_ZONE_STRING)) {
-            ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTimeZone);
+            ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
             convertedDateLabel.setText("New date: " + newDate);
         } else {
             convertedDateLabel.setText("Select a time zone!");
