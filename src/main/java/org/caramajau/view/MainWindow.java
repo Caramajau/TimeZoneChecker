@@ -4,9 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.caramajau.model.TimeFormatConverter;
 import org.caramajau.model.TimeZoneHandler;
 import org.caramajau.model.TimeZoneOffsets;
 
@@ -75,38 +80,11 @@ public class MainWindow extends AnchorPane implements Initializable {
         try {
             // Doesn't seem to necessary, but can throw except when
             // it is not in a valid format according to me.
-            String validFormatTimeString = convertToValidFormat(selectedTimeString);
+            String validFormatTimeString = TimeFormatConverter.convertToValidFormat(selectedTimeString);
             selectedTime = LocalTime.parse(validFormatTimeString);
         } catch (IllegalArgumentException e) {
             convertedDateLabel.setText("Write 2 or 4 numbers!");
         }
-    }
-
-    private String convertToValidFormat(String selectedTimeString) throws IllegalArgumentException {
-        String timeNumbersString = findTimeNumbersInString(selectedTimeString);
-        return createValidFormat(timeNumbersString);
-
-    }
-
-    private static String findTimeNumbersInString(String selectedTimeString) {
-        StringBuilder timeNumbersBuilder = new StringBuilder();
-        for (char c : selectedTimeString.toCharArray()) {
-            if (Character.isDigit(c)) {
-                timeNumbersBuilder.append(c);
-                if (timeNumbersBuilder.length() == 4) {
-                    break;
-                }
-            }
-        }
-        return timeNumbersBuilder.toString();
-    }
-
-    private static String createValidFormat(String timeNumbersString) throws IllegalArgumentException {
-        return switch (timeNumbersString.length()) {
-            case 2 -> timeNumbersString + ":00";
-            case 4 -> timeNumbersString.substring(0, 2) + ":" + timeNumbersString.substring(2, 4);
-            default -> throw new IllegalArgumentException("Invalid time format");
-        };
     }
 
     @FXML
