@@ -26,7 +26,7 @@ public enum TimeZoneOffsets {
     JST(9);
 
     private final int offset;
-    private TimeZoneOffsets(int offset) {
+    TimeZoneOffsets(int offset) {
         this.offset = offset;
     }
     public int getOffset() {
