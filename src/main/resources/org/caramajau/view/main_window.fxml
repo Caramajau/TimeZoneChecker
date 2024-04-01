@@ -17,6 +17,6 @@
       <Button fx:id="convertButton" layoutX="509.0" layoutY="44.0" mnemonicParsing="false" onAction="#handleConvertButtonAction" text="Convert" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="44.0" />
       <Label layoutX="669.0" layoutY="16.0" prefHeight="17.0" prefWidth="211.0" text="Select to see converted date" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0" />
       <Label fx:id="convertedDateLabel" layoutX="573.0" layoutY="48.0" prefHeight="17.0" prefWidth="211.0" text="&quot;time zone&quot;" />
-      <TextField fx:id="timeTextField" layoutX="16.0" layoutY="44.0" onAction="#handleTimeTextField" prefHeight="25.0" prefWidth="141.0" promptText="Write hour and minutes" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="44.0" />
+      <TextField fx:id="timeTextField" layoutX="16.0" layoutY="44.0" onKeyTyped="#handleTimeTextField" prefHeight="25.0" prefWidth="141.0" promptText="Write hour and minutes" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="44.0" />
    </children>
 </AnchorPane>

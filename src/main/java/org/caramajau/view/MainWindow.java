@@ -70,7 +70,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     private void handleTimeTextField() {
         String selectedTimeString = timeTextField.getText();
         try {
-            // Doesn't seem to necessary, but can throw except when
+            // Doesn't seem to necessary, but can throw exception when
             // it is not in a valid format according to me.
             String validFormatTimeString = TimeFormatConverter.convertToValidFormat(selectedTimeString);
             selectedTime = LocalTime.parse(validFormatTimeString);
