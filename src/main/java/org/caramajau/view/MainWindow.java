@@ -10,7 +10,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import org.caramajau.model.TimeFormatConverter;
 import org.caramajau.model.TimeZoneHandler;
 import org.caramajau.model.TimeZoneOffsets;
@@ -23,7 +22,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainWindow extends AnchorPane implements Initializable {
-    private final Stage primaryStage;
     @FXML
     private Label timeZoneLabel;
     @FXML
@@ -46,14 +44,8 @@ public class MainWindow extends AnchorPane implements Initializable {
     private LocalTime selectedTime = LocalTime.of(0, 0);
     private LocalDate selectedDate = LocalDate.now();
 
-    public MainWindow(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        primaryStage.setTitle("Time Zone Checker");
-
         List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviationsAsString();
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
         timeChoiceBox.setItems(allTimeZonesObservableList);

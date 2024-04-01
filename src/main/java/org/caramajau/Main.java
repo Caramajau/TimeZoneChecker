@@ -20,10 +20,11 @@ public class Main extends Application {
             // For Maven-JavaFX needs to be relative to how the Main Class is.
             String filePath = "view/main_window.fxml";
             loader = new FXMLLoader(getClass().getResource(filePath));
-            loader.setController(new MainWindow(primaryStage));
+            loader.setController(new MainWindow());
             root = loader.load();
 
             Scene scene = new Scene(root);
+            primaryStage.setTitle("Time Zone Checker");
             primaryStage.setScene(scene);
             primaryStage.show();
 
