@@ -92,7 +92,6 @@ public class MainWindow extends AnchorPane implements Initializable {
         if (!selectedTimeZone.equals(NO_SELECTED_TIME_ZONE_STRING)) {
             ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
             convertedDateLabel.setText("New date: " + newDate);
-            System.out.println(newDate);
         } else {
             convertedDateLabel.setText("Select a time zone!");
         }
