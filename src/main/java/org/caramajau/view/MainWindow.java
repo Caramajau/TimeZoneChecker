@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     // Could probably make the model simpler.
     private String selectedTimeZone = NO_SELECTED_TIME_ZONE_STRING;
     private LocalTime selectedTime = LocalTime.of(0, 0);
-    private LocalDate selectedDate = LocalDate.ofEpochDay(0);
+    private LocalDate selectedDate = LocalDate.now();
 
     public MainWindow(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -92,6 +92,7 @@ public class MainWindow extends AnchorPane implements Initializable {
         if (!selectedTimeZone.equals(NO_SELECTED_TIME_ZONE_STRING)) {
             ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
             convertedDateLabel.setText("New date: " + newDate);
+            System.out.println(newDate);
         } else {
             convertedDateLabel.setText("Select a time zone!");
         }
