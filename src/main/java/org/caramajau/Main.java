@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.caramajau.view.MainWindow;
 
 import java.io.IOException;
 
@@ -20,7 +19,6 @@ public class Main extends Application {
             // For Maven-JavaFX needs to be relative to how the Main Class is.
             String filePath = "view/main_window.fxml";
             loader = new FXMLLoader(getClass().getResource(filePath));
-            loader.setController(new MainWindow());
             root = loader.load();
 
             Scene scene = new Scene(root);
