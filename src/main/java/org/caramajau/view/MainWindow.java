@@ -24,10 +24,6 @@ import java.util.ResourceBundle;
 
 public class MainWindow extends AnchorPane implements Initializable {
     @FXML
-    private Label timeZoneLabel;
-    @FXML
-    private Label selectedDateLabel;
-    @FXML
     private Label convertedDateLabel;
     @FXML
     private ChoiceBox<String> timeChoiceBox;
@@ -58,13 +54,11 @@ public class MainWindow extends AnchorPane implements Initializable {
         String selectedTimeZoneAbbreviation = timeChoiceBox.getValue();
         TimeZoneOffsets selectedTimeZoneOffset = TimeZoneOffsets.fromString(selectedTimeZoneAbbreviation);
         selectedTimeZone = TimeZoneHandler.getTimeZoneBasedOnOffset(selectedTimeZoneOffset);
-        timeZoneLabel.setText("Selected Time Zone: " + selectedTimeZoneAbbreviation);
     }
 
     @FXML
     private void handleDatePickAction() {
         selectedDate = datePicker.getValue();
-        selectedDateLabel.setText("Selected Date: " + selectedDate);
     }
 
     @FXML
@@ -91,6 +85,5 @@ public class MainWindow extends AnchorPane implements Initializable {
         } else {
             convertedDateLabel.setText("Select a time zone!");
         }
-
     }
 }

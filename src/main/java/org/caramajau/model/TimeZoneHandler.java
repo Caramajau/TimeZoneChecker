@@ -15,6 +15,8 @@ public class TimeZoneHandler {
     private static final List<String> AllTimeZonesWithSlash = createAllTimeZonesWithSlash();
     private static final List<TimeZoneOffsets> AllTimeZonesAbbreviations = createAllTimeZoneAbbreviations();
     private static final List<String> AllTimeZonesAbbreviationsAsString = createAllTimeZoneAbbreviationsAsString();
+    private static final LocalTime defaultTime = LocalTime.of(0,0);
+    private static final LocalDate defaultDate = LocalDate.now();
 
     private TimeZoneHandler() {}
 
@@ -59,7 +61,11 @@ public class TimeZoneHandler {
     }
 
     public static ZonedDateTime convertToCurrentTimeZone(LocalDate inputDate, String inputTimeZone) {
-        return convertToCurrentTimeZone(inputDate, LocalTime.of(0,0), inputTimeZone);
+        return convertToCurrentTimeZone(inputDate, defaultTime, inputTimeZone);
+    }
+
+    public static ZonedDateTime convertToCurrentTimeZone(LocalTime inputTime, String inputTimeZone) {
+        return convertToCurrentTimeZone(defaultDate, inputTime, inputTimeZone);
     }
 
     private static List<String> createAllTimeZones() {
@@ -128,5 +134,13 @@ public class TimeZoneHandler {
 
     public static List<String> getAllTimeZoneAbbreviationsAsString() {
         return new ArrayList<>(AllTimeZonesAbbreviationsAsString);
+    }
+
+    public static LocalTime getDefaultTime() {
+        return defaultTime;
+    }
+
+    public static LocalDate getDefaultDate() {
+        return defaultDate;
     }
 }
