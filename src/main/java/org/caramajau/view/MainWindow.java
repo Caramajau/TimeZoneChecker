@@ -38,8 +38,8 @@ public class MainWindow extends AnchorPane implements Initializable {
     // Probably means numbers are fine in general
     // Could probably make the model simpler.
     private String selectedTimeZone = NO_SELECTED_TIME_ZONE_STRING;
-    private LocalTime selectedTime = LocalTime.of(0, 0);
-    private LocalDate selectedDate = LocalDate.now();
+    private LocalTime selectedTime = TimeZoneHandler.getDefaultTime();
+    private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,6 +47,8 @@ public class MainWindow extends AnchorPane implements Initializable {
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
         timeChoiceBox.setItems(allTimeZonesObservableList);
         timeChoiceBox.setOnAction(event -> handleChoiceBoxAction());
+        timeTextField.setPromptText(selectedTime.toString());
+        datePicker.setValue(selectedDate);
     }
 
     // For some reason the onAction doesn't exist in SceneBuilder
