@@ -12,7 +12,6 @@ import java.util.Set;
 
 public class TimeZoneHandler {
     private static final List<String> AllTimeZones = createAllTimeZones();
-    private static final List<String> AllTimeZonesWithSlash = createAllTimeZonesWithSlash();
     private static final List<TimeZoneOffsets> AllTimeZonesAbbreviations = createAllTimeZoneAbbreviations();
     private static final List<String> AllTimeZonesAbbreviationsAsString = createAllTimeZoneAbbreviationsAsString();
     private static final String NO_SELECTED_TIME_ZONE_STRING = "NaN";
@@ -51,8 +50,10 @@ public class TimeZoneHandler {
     }
 
     public static ZonedDateTime convertToCurrentTimeZone(LocalDate inputDate, LocalTime inputTime, String inputTimeZone) {
+        ZoneId inputTimeZoneId = ZoneId.of(inputTimeZone);
+
         // Combine the input date and time into a ZonedDateTime object
-        ZonedDateTime inputDateTime = ZonedDateTime.of(inputDate, inputTime, ZoneId.of(inputTimeZone));
+        ZonedDateTime inputDateTime = ZonedDateTime.of(inputDate, inputTime, inputTimeZoneId);
 
         // Get the current time zone
         ZoneId currentZone = ZoneId.systemDefault();
@@ -76,38 +77,6 @@ public class TimeZoneHandler {
         return allTimeZonesList;
     }
 
-    /*
-     * Categories that exist:
-     * - Africa
-     * - America
-     * - Antarctica
-     * - Arctic
-     * - Asia
-     * - Atlantic
-     * - Australia
-     * - Brazil
-     * - Canada
-     * - Chile
-     * - Etc
-     * - Europe
-     * - Indian
-     * - Mexico
-     * - Pacific
-     * - SystemV
-     * - US
-     * */
-    private static List<String> createAllTimeZonesWithSlash() {
-        Set<String> allTimeZonesSet = ZoneId.getAvailableZoneIds();
-        ArrayList<String> allTimeZonesList = new ArrayList<>();
-        for (String timeZone : allTimeZonesSet) {
-            if (timeZone.contains("/")) {
-                allTimeZonesList.add(timeZone);
-            }
-        }
-        allTimeZonesList.sort(String::compareTo);
-        return allTimeZonesList;
-    }
-
     private static List<TimeZoneOffsets> createAllTimeZoneAbbreviations() {
         TimeZoneOffsets[] enumArray = TimeZoneOffsets.values();
         return new ArrayList<>(List.of(enumArray));
@@ -123,10 +92,6 @@ public class TimeZoneHandler {
 
     public static List<String> getAllTimeZones() {
         return new ArrayList<>(AllTimeZones);
-    }
-
-    public static List<String> getAllTimeZonesWithSlash() {
-        return new ArrayList<>(AllTimeZonesWithSlash);
     }
 
     public static List<TimeZoneOffsets> getAllTimeZoneAbbreviations() {
