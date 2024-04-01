@@ -46,10 +46,15 @@ public class MainWindow extends AnchorPane implements Initializable {
         timeChoiceBox.setOnAction(event -> handleChoiceBoxAction());
         timeTextField.setPromptText(selectedTime.toString());
         datePicker.setValue(selectedDate);
+        convertButton.setDisable(true);
     }
 
     // For some reason the onAction doesn't exist in SceneBuilder
     private void handleChoiceBoxAction() {
+        // Can only convert after having set to a valid time zone.
+        if (selectedTimeZone.equals(TimeZoneHandler.getNoSelectedTimeZoneString())) {
+            convertButton.setDisable(false);
+        }
         String selectedTimeZoneAbbreviation = timeChoiceBox.getValue();
         TimeZoneOffsets selectedTimeZoneOffset = TimeZoneOffsets.fromString(selectedTimeZoneAbbreviation);
         selectedTimeZone = TimeZoneHandler.getTimeZoneBasedOnOffset(selectedTimeZoneOffset);
@@ -75,14 +80,10 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     @FXML
     private void handleConvertButtonAction() {
-        if (!selectedTimeZone.equals(TimeZoneHandler.getNoSelectedTimeZoneString())) {
-            ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
+        ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
 
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
-            String formattedDate = newDate.format(dateFormatter);
-            convertedDateLabel.setText("New date: " + formattedDate);
-        } else {
-            convertedDateLabel.setText("Select a time zone!");
-        }
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
+        String formattedDate = newDate.format(dateFormatter);
+        convertedDateLabel.setText("New date: " + formattedDate);
     }
 }
