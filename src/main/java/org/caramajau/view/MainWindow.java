@@ -18,6 +18,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -83,7 +84,10 @@ public class MainWindow extends AnchorPane implements Initializable {
     private void handleConvertButtonAction() {
         if (!selectedTimeZone.equals(NO_SELECTED_TIME_ZONE_STRING)) {
             ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
-            convertedDateLabel.setText("New date: " + newDate);
+
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
+            String formattedDate = newDate.format(dateFormatter);
+            convertedDateLabel.setText("New date: " + formattedDate);
         } else {
             convertedDateLabel.setText("Select a time zone!");
         }
