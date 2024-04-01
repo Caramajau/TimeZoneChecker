@@ -33,11 +33,8 @@ public class MainWindow extends AnchorPane implements Initializable {
     private TextField timeTextField;
     @FXML
     private Button convertButton;
-    private static final String NO_SELECTED_TIME_ZONE_STRING = "NaN";
-    // Note to self: "-1" is a valid time zone
-    // Probably means numbers are fine in general
-    // Could probably make the model simpler.
-    private String selectedTimeZone = NO_SELECTED_TIME_ZONE_STRING;
+
+    private String selectedTimeZone = TimeZoneHandler.getNoSelectedTimeZoneString();
     private LocalTime selectedTime = TimeZoneHandler.getDefaultTime();
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
 
@@ -78,7 +75,7 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     @FXML
     private void handleConvertButtonAction() {
-        if (!selectedTimeZone.equals(NO_SELECTED_TIME_ZONE_STRING)) {
+        if (!selectedTimeZone.equals(TimeZoneHandler.getNoSelectedTimeZoneString())) {
             ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
 
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");

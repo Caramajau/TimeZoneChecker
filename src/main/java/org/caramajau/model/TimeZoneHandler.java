@@ -15,6 +15,7 @@ public class TimeZoneHandler {
     private static final List<String> AllTimeZonesWithSlash = createAllTimeZonesWithSlash();
     private static final List<TimeZoneOffsets> AllTimeZonesAbbreviations = createAllTimeZoneAbbreviations();
     private static final List<String> AllTimeZonesAbbreviationsAsString = createAllTimeZoneAbbreviationsAsString();
+    private static final String NO_SELECTED_TIME_ZONE_STRING = "NaN";
     private static final LocalTime defaultTime = LocalTime.of(0,0);
     private static final LocalDate defaultDate = LocalDate.now();
 
@@ -134,6 +135,10 @@ public class TimeZoneHandler {
 
     public static List<String> getAllTimeZoneAbbreviationsAsString() {
         return new ArrayList<>(AllTimeZonesAbbreviationsAsString);
+    }
+
+    public static String getNoSelectedTimeZoneString() {
+        return NO_SELECTED_TIME_ZONE_STRING;
     }
 
     public static LocalTime getDefaultTime() {
