@@ -10,7 +10,11 @@
 
 <AnchorPane prefHeight="100.0" prefWidth="800.0" stylesheets="@main_window.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.caramajau.view.MainWindow">
    <children>
-      <ChoiceBox fx:id="timeChoiceBox" layoutX="300.0" layoutY="46.0" prefWidth="180.0" styleClass="normal_text" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="44.0" />
+      <ChoiceBox fx:id="timeChoiceBox" layoutX="300.0" layoutY="43.0" prefWidth="180.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="43.0">
+         <styleClass>
+            <String fx:value="normal_text" />
+            <String fx:value="time_zone_choice_box" />
+         </styleClass></ChoiceBox>
       <Label layoutX="168.0" layoutY="16.0" prefHeight="16.0" prefWidth="180.0" styleClass="title_text" text="Choose a time zone" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="16.0" />
       <DatePicker fx:id="datePicker" layoutX="357.0" layoutY="47.0" onAction="#handleDatePickAction" prefWidth="120.0" styleClass="normal_text" AnchorPane.leftAnchor="168.0" AnchorPane.topAnchor="44.0" />
       <Label layoutX="300.0" layoutY="18.0" maxWidth="174.0" prefHeight="16.0" prefWidth="120.0" styleClass="title_text" text="Choose a date" AnchorPane.leftAnchor="168.0" AnchorPane.topAnchor="16.0" />

@@ -22,3 +22,34 @@
     -fx-background-color: #cccccc;
     -fx-cursor: hand;
 }
+
+.time_zone_choice_box {
+    -fx-text-fill: #000000;
+    -fx-background-radius: 1;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 2, 0, 0, 0);
+}
+
+.time_zone_choice_box:hover {
+    -fx-background-color: #e6e6e6;
+    -fx-cursor: hand;
+}
+.time_zone_choice_box:pressed {
+    -fx-background-color: #cccccc;
+    -fx-cursor: hand;
+}
+
+.time_zone_choice_box .context-menu {
+    -fx-background-color: #ffffff; 
+    -fx-cursor: hand;
+}
+
+.time_zone_choice_box .context-menu .menu-item {
+    -fx-text-fill: #000000; 
+    -fx-background-color: #ffffff; 
+}
+
+.time_zone_choice_box .context-menu .menu-item:focused {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #212121;
+}
