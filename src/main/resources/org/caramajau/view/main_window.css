@@ -1,3 +1,4 @@
+/* Text elements */
 .normal_text {
     -fx-font-size: 14px;
     -fx-text-fill: #000000;
@@ -9,6 +10,7 @@
     -fx-font-weight: bold;
 }
 
+/* Buttons */
 .convert_button {
     -fx-background-radius: 1;
     -fx-background-color: #ffffff;
@@ -23,6 +25,7 @@
     -fx-cursor: hand;
 }
 
+/* Choice boxes */
 .time_zone_choice_box {
     -fx-text-fill: #000000;
     -fx-background-radius: 1;
