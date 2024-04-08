@@ -1,0 +1,10 @@
+.normal_text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+.title_text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+}
