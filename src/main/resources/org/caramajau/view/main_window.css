@@ -8,3 +8,17 @@
     -fx-text-fill: #000000;
     -fx-font-weight: bold;
 }
+
+.convert_button {
+    -fx-background-radius: 1;
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 2, 0, 0, 0);
+}
+.convert_button:hover {
+    -fx-background-color: #e6e6e6;
+    -fx-cursor: hand;
+}
+.convert_button:pressed {
+    -fx-background-color: #cccccc;
+    -fx-cursor: hand;
+}
