@@ -138,6 +138,22 @@
     /* the week cells don't do anything when clicked, display that using cursor hinting */
     -fx-cursor: arrow;
 }
+/* The cells specifically for the day names */
+.date-picker .day-name-cell {
+	-fx-text-fill: -fx-secondary-colour;
+}
+.date-picker .day-name-cell:hover {
+	-fx-background-color: #ffffff;
+	-fx-text-fill: -fx-secondary-colour;
+    /* the day name cells don't do anything when clicked, display that using cursor hinting */
+    -fx-cursor: arrow;
+}
+.date-picker .day-name-cell:pressed {
+	-fx-background-color: #ffffff;
+	-fx-text-fill: -fx-secondary-colour;
+    /* the day name cells don't do anything when clicked, display that using cursor hinting */
+    -fx-cursor: arrow;
+}
 
 /* The boxes around the arrows are quite awkward, so make them transparent */
 .date-picker-popup .spinner .button {
