@@ -59,26 +59,26 @@
 
 /* Datepicker */
 .date-picker {
-	-fx-primary-color: #212121;
-	-fx-secondary-color: #303030;
-    -fx-tertiary-color: #424242;
-	-fx-light-grey-color: #d1d1d1;
+	-fx-primary-colour: #212121;
+	-fx-secondary-colour: #303030;
+    -fx-tertiary-colour: #424242;
+	-fx-light-grey-colour: #d1d1d1;
     
     /* Colour for the border when the datepicker is clicked and the datepicker popup is shown */
-	-fx-focus-color: -fx-secondary-color;
+	-fx-focus-color: -fx-secondary-colour;
 }
 
 /* arrow button in this case is using a date icon instead of the default arrow 
     because it is a datepicker element. */
 .date-picker .arrow-button {
-	-fx-background-color: -fx-primary-color;
+	-fx-background-color: -fx-primary-colour;
 	-fx-background-radius: 0;
 }
 .date-picker .arrow-button:hover {
-	-fx-background-color: -fx-secondary-color;
+	-fx-background-color: -fx-secondary-colour;
 }
 .date-picker .arrow-button:pressed {
-    -fx-background-color: -fx-tertiary-color;     
+    -fx-background-color: -fx-tertiary-colour;     
 }
 .date-picker .arrow-button .arrow {
 	-fx-background-color: #ffffff;
@@ -89,23 +89,23 @@
 	-fx-background-color: #ffffff;
 }
 .date-picker .cell:hover {
-	-fx-background-color: -fx-light-grey-color;
-    -fx-text-fill: -fx-primary-color;
+	-fx-background-color: -fx-light-grey-colour;
+    -fx-text-fill: -fx-primary-colour;
 }
 .date-picker .cell:pressed {
-    -fx-background-color: -fx-tertiary-color;
+    -fx-background-color: -fx-tertiary-colour;
     -fx-text-fill: #ffffff;
 }
 
 /* CSS for the selected date */
 .date-picker .selected {
-	-fx-background-color: -fx-primary-color;
+	-fx-background-color: -fx-primary-colour;
 	-fx-text-fill: #ffffff;
 }
 /* Makes the selected date keep its colour even when focused, 
     looks strange otherwise. */
 .date-picker .selected:focused {
-	-fx-background-color: -fx-primary-color;
+	-fx-background-color: -fx-primary-colour;
 	-fx-text-fill: #ffffff;
 }
 
@@ -115,14 +115,14 @@
 }
 /* The row above the cells */
 .date-picker-popup .month-year-pane {
-	-fx-background-color: -fx-primary-color;
+	-fx-background-color: -fx-primary-colour;
 }
 .date-picker-popup .month-year-pane .label {
-	-fx-text-fill: white;
+	-fx-text-fill: #ffffff;
 }
 /* The cells specifically for the week numbers */
 .date-picker-popup .week-number-cell {
-	-fx-text-fill: -fx-secondary-color;
+	-fx-text-fill: -fx-secondary-colour;
 }
 
 /* The boxes around the arrows are quite awkward, so make them transparent */
@@ -138,10 +138,10 @@
 
 .date-picker-popup .spinner .button .left-arrow:hover,
 .date-picker-popup .spinner .button .right-arrow:hover {
-	-fx-background-color: -fx-light-grey-color;
+	-fx-background-color: -fx-light-grey-colour;
 }
 
 .date-picker-popup .spinner .button .left-arrow:pressed,
 .date-picker-popup .spinner .button .right-arrow:pressed {
-	-fx-background-color: -fx-tertiary-color;
+	-fx-background-color: -fx-tertiary-colour;
 }
