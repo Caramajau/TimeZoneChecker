@@ -76,6 +76,7 @@
 }
 .date-picker .arrow-button:hover {
 	-fx-background-color: -fx-secondary-colour;
+    -fx-cursor: hand;
 }
 .date-picker .arrow-button:pressed {
     -fx-background-color: -fx-tertiary-colour;     
@@ -91,6 +92,7 @@
 .date-picker .cell:hover {
 	-fx-background-color: -fx-light-grey-colour;
     -fx-text-fill: -fx-primary-colour;
+    -fx-cursor: hand;
 }
 .date-picker .cell:pressed {
     -fx-background-color: -fx-tertiary-colour;
@@ -124,10 +126,23 @@
 .date-picker-popup .week-number-cell {
 	-fx-text-fill: -fx-secondary-colour;
 }
+.date-picker-popup .week-number-cell:hover {
+	-fx-background-color: #ffffff;
+	-fx-text-fill: -fx-secondary-colour;
+    /* the week cells don't do anything when clicked, display that using cursor hinting */
+    -fx-cursor: arrow;
+}
+.date-picker-popup .week-number-cell:pressed {
+	-fx-background-color: #ffffff;
+	-fx-text-fill: -fx-secondary-colour;
+    /* the week cells don't do anything when clicked, display that using cursor hinting */
+    -fx-cursor: arrow;
+}
 
 /* The boxes around the arrows are quite awkward, so make them transparent */
 .date-picker-popup .spinner .button {
     -fx-background-color: transparent;
+    -fx-cursor: hand;
 }
 
 /* Can change the arrows instead */
