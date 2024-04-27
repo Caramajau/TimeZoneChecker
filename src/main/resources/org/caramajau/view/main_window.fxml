@@ -10,22 +10,22 @@
 
 <AnchorPane prefHeight="100.0" prefWidth="800.0" stylesheets="@main_window.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.caramajau.view.MainWindow">
    <children>
-      <ChoiceBox fx:id="timeChoiceBox" layoutX="300.0" layoutY="43.0" prefWidth="180.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="43.0">
+      <ChoiceBox fx:id="timeChoiceBox" layoutX="300.0" layoutY="43.0" prefHeight="30.0" prefWidth="180.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="43.0">
          <styleClass>
             <String fx:value="normal_text" />
             <String fx:value="time_zone_choice_box" />
          </styleClass></ChoiceBox>
       <Label layoutX="168.0" layoutY="16.0" prefHeight="16.0" prefWidth="180.0" styleClass="title_text" text="Choose a time zone" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="16.0" />
-      <DatePicker fx:id="datePicker" layoutX="357.0" layoutY="47.0" onAction="#handleDatePickAction" prefWidth="120.0" styleClass="normal_text" AnchorPane.leftAnchor="168.0" AnchorPane.topAnchor="44.0" />
+      <DatePicker fx:id="datePicker" layoutX="357.0" layoutY="47.0" onAction="#handleDatePickAction" prefHeight="30.0" prefWidth="120.0" styleClass="normal_text" AnchorPane.leftAnchor="168.0" AnchorPane.topAnchor="44.0" />
       <Label layoutX="300.0" layoutY="18.0" maxWidth="174.0" prefHeight="16.0" prefWidth="120.0" styleClass="title_text" text="Choose a date" AnchorPane.leftAnchor="168.0" AnchorPane.topAnchor="16.0" />
       <Label layoutX="357.0" layoutY="14.0" prefHeight="16.0" prefWidth="120.0" styleClass="title_text" text="Choose a time" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0" />
-      <Button fx:id="convertButton" layoutX="491.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleConvertButtonAction" text="Convert" AnchorPane.leftAnchor="491.0" AnchorPane.topAnchor="43.0">
+      <Button fx:id="convertButton" layoutX="491.0" layoutY="43.0" mnemonicParsing="false" onAction="#handleConvertButtonAction" prefHeight="30.0" text="Convert" AnchorPane.leftAnchor="491.0" AnchorPane.topAnchor="43.0">
          <styleClass>
             <String fx:value="normal_text" />
             <String fx:value="convert_button" />
          </styleClass></Button>
       <Label layoutX="669.0" layoutY="16.0" prefHeight="17.0" prefWidth="211.0" styleClass="title_text" text="Select to see converted date" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0" />
-      <Label fx:id="convertedDateLabel" layoutX="573.0" layoutY="48.0" prefHeight="17.0" prefWidth="211.0" styleClass="normal_text" text="Enter a time zone." />
-      <TextField fx:id="timeTextField" layoutX="16.0" layoutY="44.0" onKeyTyped="#handleTimeTextField" prefHeight="25.0" prefWidth="141.0" promptText="Write hour and minutes" styleClass="normal_text" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="44.0" />
+      <Label fx:id="convertedDateLabel" layoutX="573.0" layoutY="43.0" prefHeight="30.0" prefWidth="211.0" styleClass="normal_text" text="Enter a time zone." AnchorPane.leftAnchor="573.0" AnchorPane.topAnchor="43.0" />
+      <TextField fx:id="timeTextField" layoutX="16.0" layoutY="44.0" onKeyTyped="#handleTimeTextField" prefHeight="30.0" prefWidth="53.0" promptText="00:00" styleClass="normal_text" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="44.0" />
    </children>
 </AnchorPane>
