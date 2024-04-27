@@ -59,8 +59,20 @@ public class MainWindow extends AnchorPane implements Initializable {
                 if (newText.length() > MAX_TEXT_LENGTH) {
                     timeTextField.setText(oldText);
                 }
+                if (stringContainsInvalidCharacter(newText)) {
+                    timeTextField.setText(oldText);
+                }
             }
         );
+    }
+
+    private boolean stringContainsInvalidCharacter(String stringToTest) {
+        for (char c : stringToTest.toCharArray()) {
+            if (!Character.isDigit(c) && c != ':') {
+                return true;
+            }
+        }
+        return false;
     }
 
     // For some reason the onAction doesn't exist in SceneBuilder
