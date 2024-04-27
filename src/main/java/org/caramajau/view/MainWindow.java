@@ -38,15 +38,29 @@ public class MainWindow extends AnchorPane implements Initializable {
     private LocalTime selectedTime = TimeZoneHandler.getDefaultTime();
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
 
+    private static final int MAX_TEXT_LENGTH = 5;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviationsAsString();
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
+
         timeChoiceBox.setItems(allTimeZonesObservableList);
         timeChoiceBox.setOnAction(event -> handleChoiceBoxAction());
+
         timeTextField.setPromptText(selectedTime.toString());
+
         datePicker.setValue(selectedDate);
+
         convertButton.setDisable(true);
+
+        timeTextField.textProperty().addListener(
+            (observable, oldText, newText)-> {
+                if (newText.length() > MAX_TEXT_LENGTH) {
+                    timeTextField.setText(oldText);
+                }
+            }
+        );
     }
 
     // For some reason the onAction doesn't exist in SceneBuilder
