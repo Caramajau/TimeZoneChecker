@@ -37,7 +37,8 @@ public class MainWindow extends AnchorPane implements Initializable {
     private Button convertButton;
 
     private String selectedTimeZone = TimeZoneHandler.getNoSelectedTimeZoneString();
-    private LocalTime selectedTime = TimeZoneHandler.getDefaultTime();
+    private int selectedHour = TimeZoneHandler.getDefaultTime().getHour();
+    private int selectedMinute = TimeZoneHandler.getDefaultTime().getMinute();
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
 
     private static final int MAX_TEXT_LENGTH = 5;
@@ -53,8 +54,8 @@ public class MainWindow extends AnchorPane implements Initializable {
         datePicker.setValue(selectedDate);
 
         convertButton.setDisable(true);
-
-        hourTextField.setPromptText(selectedTime.toString());
+        String formatedHour = String.format("%02d", selectedHour);
+        hourTextField.setPromptText(formatedHour);
         hourTextField.textProperty().addListener(
             (observable, oldText, newText)-> {
                 if (newText.length() > MAX_TEXT_LENGTH) {
@@ -65,6 +66,8 @@ public class MainWindow extends AnchorPane implements Initializable {
                 }
             }
         );
+        String formatedMinute = String.format("%02d", selectedMinute);
+        minuteTextField.setPromptText(formatedMinute);
     }
 
     private boolean stringContainsInvalidCharacter(String stringToTest) {
@@ -95,22 +98,32 @@ public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private void handleTimeTextField() {
         String selectedTimeString = hourTextField.getText();
-        try {
-            // Doesn't seem to necessary, but can throw exception when
-            // it is not in a valid format according to me.
-            String validFormatTimeString = TimeFormatConverter.convertToValidFormat(selectedTimeString);
-            selectedTime = LocalTime.parse(validFormatTimeString);
-        } catch (IllegalArgumentException e) {
-            convertedDateLabel.setText("Write 2 or 4 numbers!");
+
+        boolean isAllDigit = isAllDigit(selectedTimeString);
+
+        if (isAllDigit && !selectedTimeString.isEmpty()) {
+            selectedHour = Integer.parseInt(selectedTimeString);
+        } else {
+            selectedHour = 0;
         }
     }
 
     @FXML
     private void handleConvertButtonAction() {
+        LocalTime selectedTime = LocalTime.of(selectedHour, selectedMinute);
         ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
         String formattedDate = newDate.format(dateFormatter);
         convertedDateLabel.setText("New date: " + formattedDate);
+    }
+
+    private boolean isAllDigit(String stringToTest) {
+        for (char c : stringToTest.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

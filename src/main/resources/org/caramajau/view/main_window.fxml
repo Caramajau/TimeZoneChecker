@@ -26,6 +26,8 @@
          </styleClass></Button>
       <Label layoutX="669.0" layoutY="16.0" prefHeight="17.0" prefWidth="211.0" styleClass="title_text" text="Select to see converted date" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0" />
       <Label fx:id="convertedDateLabel" layoutX="573.0" layoutY="43.0" prefHeight="30.0" prefWidth="211.0" styleClass="normal_text" text="Enter a time zone." AnchorPane.leftAnchor="573.0" AnchorPane.topAnchor="43.0" />
-      <TextField fx:id="hourTextField" layoutX="16.0" layoutY="44.0" onKeyTyped="#handleTimeTextField" prefHeight="30.0" prefWidth="53.0" promptText="00:00" styleClass="normal_text" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="44.0" />
+      <TextField fx:id="hourTextField" layoutX="16.0" layoutY="44.0" onKeyTyped="#handleTimeTextField" prefHeight="30.0" prefWidth="32.0" promptText="00" styleClass="normal_text" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="44.0" />
+      <TextField fx:id="minuteTextField" layoutX="60.0" layoutY="44.0" onKeyTyped="#handleTimeTextField" prefHeight="30.0" prefWidth="32.0" promptText="00" styleClass="normal_text" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="44.0" />
+      <Label alignment="CENTER" layoutX="48.0" layoutY="44.0" prefHeight="30.0" prefWidth="14.0" styleClass="normal_text" text=":" />
    </children>
 </AnchorPane>
