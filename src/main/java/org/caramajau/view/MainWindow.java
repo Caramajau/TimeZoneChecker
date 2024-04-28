@@ -55,13 +55,13 @@ public class MainWindow extends AnchorPane implements Initializable {
         datePicker.setValue(selectedDate);
 
         convertButton.setDisable(true);
-        String formatedHour = String.format("%02d", selectedHour);
-        hourTextField.setPromptText(formatedHour);
+        String formattedHour = String.format("%02d", selectedHour);
+        hourTextField.setPromptText(formattedHour);
         hourTextField.textProperty().addListener(
             (observable, oldText, newText) -> handleTextFieldChange(hourTextField, oldText, newText, MAX_HOUR)
         );
-        String formatedMinute = String.format("%02d", selectedMinute);
-        minuteTextField.setPromptText(formatedMinute);
+        String formattedMinute = String.format("%02d", selectedMinute);
+        minuteTextField.setPromptText(formattedMinute);
         minuteTextField.textProperty().addListener(
                 (observable, oldText, newText) -> handleTextFieldChange(minuteTextField, oldText, newText, MAX_MINUTE)
         );
