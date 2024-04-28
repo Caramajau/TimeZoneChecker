@@ -10,7 +10,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import org.caramajau.model.TimeFormatConverter;
 import org.caramajau.model.TimeZoneHandler;
 import org.caramajau.model.TimeZoneOffsets;
 
@@ -41,7 +40,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     private int selectedMinute = TimeZoneHandler.getDefaultTime().getMinute();
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
 
-    private static final int MAX_TEXT_LENGTH = 5;
+    private static final int MAX_TEXT_LENGTH = 2;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -96,15 +95,27 @@ public class MainWindow extends AnchorPane implements Initializable {
     }
 
     @FXML
-    private void handleTimeTextField() {
-        String selectedTimeString = hourTextField.getText();
+    private void handleHourTextField() {
+        String selectedHourString = hourTextField.getText();
 
-        boolean isAllDigit = isAllDigit(selectedTimeString);
+        boolean isAllDigit = isAllDigit(selectedHourString);
 
-        if (isAllDigit && !selectedTimeString.isEmpty()) {
-            selectedHour = Integer.parseInt(selectedTimeString);
+        if (isAllDigit && !selectedHourString.isEmpty()) {
+            selectedHour = Integer.parseInt(selectedHourString);
         } else {
             selectedHour = 0;
+        }
+    }
+
+    @FXML
+    private void handleMinuteTextField() {
+        String selectedMinuteString = minuteTextField.getText();
+        boolean isAllDigit = isAllDigit(selectedMinuteString);
+
+        if (isAllDigit && !selectedMinuteString.isEmpty()) {
+            selectedMinute = Integer.parseInt(selectedMinuteString);
+        } else {
+            selectedMinute = 0;
         }
     }
 
