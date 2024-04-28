@@ -68,13 +68,13 @@ public class MainWindow extends AnchorPane implements Initializable {
     }
 
     private void handleTextFieldChange(TextField textField, String oldText, String newText, int numberLimit) {
-        if (newText.length() > MAX_TEXT_LENGTH) {
-            textField.setText(oldText);
-        }
         if (!isAllDigit(newText)) {
             textField.setText(oldText);
         }
-        if (newText.isEmpty()) {
+        if (newText.length() > MAX_TEXT_LENGTH) {
+            textField.setText(oldText);
+            minuteTextField.requestFocus(); // TODO make this less hard-coded.
+        } else if (newText.isEmpty()){
             textField.setText((newText));
         } else if (Integer.parseInt(newText) > numberLimit) {
             textField.setText(String.valueOf(numberLimit));
