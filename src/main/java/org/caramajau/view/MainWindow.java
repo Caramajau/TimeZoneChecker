@@ -41,6 +41,8 @@ public class MainWindow extends AnchorPane implements Initializable {
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
 
     private static final int MAX_TEXT_LENGTH = 2;
+    private static final int MAX_HOUR = 23;
+    private static final int MAX_MINUTE = 59;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,16 +58,16 @@ public class MainWindow extends AnchorPane implements Initializable {
         String formatedHour = String.format("%02d", selectedHour);
         hourTextField.setPromptText(formatedHour);
         hourTextField.textProperty().addListener(
-            (observable, oldText, newText) -> handleTextFieldChange(hourTextField, oldText, newText)
+            (observable, oldText, newText) -> handleTextFieldChange(hourTextField, oldText, newText, MAX_HOUR)
         );
         String formatedMinute = String.format("%02d", selectedMinute);
         minuteTextField.setPromptText(formatedMinute);
         minuteTextField.textProperty().addListener(
-                (observable, oldText, newText) -> handleTextFieldChange(minuteTextField, oldText, newText)
+                (observable, oldText, newText) -> handleTextFieldChange(minuteTextField, oldText, newText, MAX_MINUTE)
         );
     }
 
-    private void handleTextFieldChange(TextField textField, String oldText, String newText) {
+    private void handleTextFieldChange(TextField textField, String oldText, String newText, int numberLimit) {
         if (newText.length() > MAX_TEXT_LENGTH) {
             textField.setText(oldText);
         }
@@ -74,8 +76,8 @@ public class MainWindow extends AnchorPane implements Initializable {
         }
         if (newText.isEmpty()) {
             textField.setText((newText));
-        } else if (Integer.parseInt(newText) > 59) {
-            textField.setText(String.valueOf(59));
+        } else if (Integer.parseInt(newText) > numberLimit) {
+            textField.setText(String.valueOf(numberLimit));
         }
     }
 
