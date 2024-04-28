@@ -30,7 +30,9 @@ public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private DatePicker datePicker;
     @FXML
-    private TextField timeTextField;
+    private TextField hourTextField;
+    @FXML
+    private TextField minuteTextField;
     @FXML
     private Button convertButton;
 
@@ -48,19 +50,18 @@ public class MainWindow extends AnchorPane implements Initializable {
         timeChoiceBox.setItems(allTimeZonesObservableList);
         timeChoiceBox.setOnAction(event -> handleChoiceBoxAction());
 
-        timeTextField.setPromptText(selectedTime.toString());
-
         datePicker.setValue(selectedDate);
 
         convertButton.setDisable(true);
 
-        timeTextField.textProperty().addListener(
+        hourTextField.setPromptText(selectedTime.toString());
+        hourTextField.textProperty().addListener(
             (observable, oldText, newText)-> {
                 if (newText.length() > MAX_TEXT_LENGTH) {
-                    timeTextField.setText(oldText);
+                    hourTextField.setText(oldText);
                 }
                 if (stringContainsInvalidCharacter(newText)) {
-                    timeTextField.setText(oldText);
+                    hourTextField.setText(oldText);
                 }
             }
         );
@@ -93,7 +94,7 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     @FXML
     private void handleTimeTextField() {
-        String selectedTimeString = timeTextField.getText();
+        String selectedTimeString = hourTextField.getText();
         try {
             // Doesn't seem to necessary, but can throw exception when
             // it is not in a valid format according to me.
