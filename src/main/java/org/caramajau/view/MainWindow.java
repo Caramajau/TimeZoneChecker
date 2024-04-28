@@ -56,26 +56,27 @@ public class MainWindow extends AnchorPane implements Initializable {
         String formatedHour = String.format("%02d", selectedHour);
         hourTextField.setPromptText(formatedHour);
         hourTextField.textProperty().addListener(
-            (observable, oldText, newText)-> {
-                if (newText.length() > MAX_TEXT_LENGTH) {
-                    hourTextField.setText(oldText);
-                }
-                if (stringContainsInvalidCharacter(newText)) {
-                    hourTextField.setText(oldText);
-                }
-            }
+            (observable, oldText, newText) -> handleTextFieldChange(hourTextField, oldText, newText)
         );
         String formatedMinute = String.format("%02d", selectedMinute);
         minuteTextField.setPromptText(formatedMinute);
+        minuteTextField.textProperty().addListener(
+                (observable, oldText, newText) -> handleTextFieldChange(minuteTextField, oldText, newText)
+        );
     }
 
-    private boolean stringContainsInvalidCharacter(String stringToTest) {
-        for (char c : stringToTest.toCharArray()) {
-            if (!Character.isDigit(c) && c != ':') {
-                return true;
-            }
+    private void handleTextFieldChange(TextField textField, String oldText, String newText) {
+        if (newText.length() > MAX_TEXT_LENGTH) {
+            textField.setText(oldText);
         }
-        return false;
+        if (!isAllDigit(newText)) {
+            textField.setText(oldText);
+        }
+        if (newText.isEmpty()) {
+            textField.setText((newText));
+        } else if (Integer.parseInt(newText) > 59) {
+            textField.setText(String.valueOf(59));
+        }
     }
 
     // For some reason the onAction doesn't exist in SceneBuilder
