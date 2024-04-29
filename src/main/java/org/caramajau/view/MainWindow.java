@@ -36,7 +36,8 @@ public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private Button convertButton;
 
-    private final HashMap<TextField, Integer> timeTextFields = new HashMap<>();
+    private final HashMap<TextField, TextField> getNextTimeTextField = new HashMap<>();
+    private final HashMap<TextField, TextField> getPreviousTimeTextField = new HashMap<>();
 
     private String selectedTimeZone = TimeZoneHandler.getNoSelectedTimeZoneString();
     private int selectedHour = TimeZoneHandler.getDefaultTime().getHour();
@@ -49,8 +50,10 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        timeTextFields.put(hourTextField, MAX_HOUR);
-        timeTextFields.put(minuteTextField, MAX_MINUTE);
+        getNextTimeTextField.put(hourTextField, minuteTextField);
+        getNextTimeTextField.put(minuteTextField, minuteTextField);
+        getPreviousTimeTextField.put(hourTextField, hourTextField);
+        getPreviousTimeTextField.put(minuteTextField, hourTextField);
 
         List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviationsAsString();
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
@@ -79,9 +82,12 @@ public class MainWindow extends AnchorPane implements Initializable {
         }
         if (newText.length() > MAX_TEXT_LENGTH) {
             textField.setText(oldText);
-            minuteTextField.requestFocus(); // TODO make this less hard-coded.
+            TextField nextTextField = getNextTimeTextField.get(textField);
+            nextTextField.requestFocus();
         } else if (newText.isEmpty()){
             textField.setText((newText));
+            TextField previousTextField = getPreviousTimeTextField.get(textField);
+            previousTextField.requestFocus();
         } else if (Integer.parseInt(newText) > numberLimit) {
             textField.setText(String.valueOf(numberLimit));
         }
