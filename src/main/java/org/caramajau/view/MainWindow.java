@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -35,6 +36,8 @@ public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private Button convertButton;
 
+    private final HashMap<TextField, Integer> timeTextFields = new HashMap<>();
+
     private String selectedTimeZone = TimeZoneHandler.getNoSelectedTimeZoneString();
     private int selectedHour = TimeZoneHandler.getDefaultTime().getHour();
     private int selectedMinute = TimeZoneHandler.getDefaultTime().getMinute();
@@ -46,6 +49,9 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        timeTextFields.put(hourTextField, MAX_HOUR);
+        timeTextFields.put(minuteTextField, MAX_MINUTE);
+
         List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviationsAsString();
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
 
@@ -55,15 +61,15 @@ public class MainWindow extends AnchorPane implements Initializable {
         datePicker.setValue(selectedDate);
 
         convertButton.setDisable(true);
+        initializeTimeTextField(selectedHour, hourTextField, MAX_HOUR);
+        initializeTimeTextField(selectedMinute, minuteTextField, MAX_MINUTE);
+    }
+
+    private void initializeTimeTextField(int selectedHour, TextField timeTextField, int maxTime) {
         String formattedHour = String.format("%02d", selectedHour);
-        hourTextField.setPromptText(formattedHour);
-        hourTextField.textProperty().addListener(
-            (observable, oldText, newText) -> handleTextFieldChange(hourTextField, oldText, newText, MAX_HOUR)
-        );
-        String formattedMinute = String.format("%02d", selectedMinute);
-        minuteTextField.setPromptText(formattedMinute);
-        minuteTextField.textProperty().addListener(
-                (observable, oldText, newText) -> handleTextFieldChange(minuteTextField, oldText, newText, MAX_MINUTE)
+        timeTextField.setPromptText(formattedHour);
+        timeTextField.textProperty().addListener(
+            (observable, oldText, newText) -> handleTextFieldChange(timeTextField, oldText, newText, maxTime)
         );
     }
 
