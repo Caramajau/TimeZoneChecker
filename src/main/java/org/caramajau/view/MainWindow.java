@@ -81,25 +81,34 @@ public class MainWindow extends AnchorPane implements Initializable {
             textField.setText(oldText);
         }
         if (newText.length() > MAX_TEXT_LENGTH) {
-            textField.setText(oldText);
-            TextField nextTextField = getNextTimeTextField.get(textField);
-            nextTextField.requestFocus();
-
-            // send the new character to the next text field and only if it can.
-            if (nextTextField.getText().length() < MAX_TEXT_LENGTH) {
-                nextTextField.setText(String.valueOf(newText.charAt(newText.length() - 1)));
-            }
-            // Move the cursor so that it is at the end.
-            nextTextField.end();
+            handleMaxTextLengthExceeded(textField, oldText, newText);
 
         } else if (newText.isEmpty()){
-            textField.setText((newText));
-            TextField previousTextField = getPreviousTimeTextField.get(textField);
-            previousTextField.requestFocus();
-            previousTextField.end();
+            handleEmptyText(textField, newText);
+
         } else if (Integer.parseInt(newText) > numberLimit) {
             textField.setText(String.valueOf(numberLimit));
         }
+    }
+
+    private void handleMaxTextLengthExceeded(TextField textField, String oldText, String newText) {
+        textField.setText(oldText);
+        TextField nextTextField = getNextTimeTextField.get(textField);
+        nextTextField.requestFocus();
+
+        // send the new character to the next text field and only if it can.
+        if (nextTextField.getText().length() < MAX_TEXT_LENGTH) {
+            nextTextField.setText(String.valueOf(newText.charAt(newText.length() - 1)));
+        }
+        // Move the cursor so that it is at the end.
+        nextTextField.end();
+    }
+
+    private void handleEmptyText(TextField textField, String newText) {
+        textField.setText(newText);
+        TextField previousTextField = getPreviousTimeTextField.get(textField);
+        previousTextField.requestFocus();
+        previousTextField.end();
     }
 
     // For some reason the onAction doesn't exist in SceneBuilder
