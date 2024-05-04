@@ -50,10 +50,7 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<TextField> textFields = new ArrayList<>();
-        textFields.add(hourTextField);
-        textFields.add(minuteTextField);
-        textFieldHandler = new OrderedFieldHandler<>(textFields);
+        textFieldHandler = createTextFieldHandler();
 
         List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviationsAsString();
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
@@ -68,20 +65,27 @@ public class MainWindow extends AnchorPane implements Initializable {
         initializeTimeTextField(selectedMinute, minuteTextField, MAX_MINUTE);
     }
 
+    private OrderedFieldHandler<TextField> createTextFieldHandler() {
+        List<TextField> textFields = new ArrayList<>();
+        textFields.add(hourTextField);
+        textFields.add(minuteTextField);
+        return new OrderedFieldHandler<>(textFields);
+    }
+
     private void initializeTimeTextField(int selectedHour, TextField timeTextField, int maxTime) {
         String formattedHour = String.format("%02d", selectedHour);
         timeTextField.setPromptText(formattedHour);
         timeTextField.textProperty().addListener(
-            (observable, oldText, newText) -> handleTextFieldChange(timeTextField, oldText, newText, maxTime)
+            (observable, oldText, newText) -> handleTextFieldChange(timeTextField, oldText, newText, MAX_TEXT_LENGTH, maxTime)
         );
     }
 
-    private void handleTextFieldChange(TextField textField, String oldText, String newText, int numberLimit) {
+    private void handleTextFieldChange(TextField textField, String oldText, String newText, int textLimit, int numberLimit) {
         if (!isAllDigit(newText)) {
             textField.setText(oldText);
 
-        } else if (newText.length() > MAX_TEXT_LENGTH) {
-            handleMaxTextLengthExceeded(textField, oldText, newText);
+        } else if (newText.length() > textLimit) {
+            handleMaxTextLengthExceeded(textField, oldText, newText, textLimit);
 
         } else if (newText.isEmpty()) {
             handleEmptyText(textField, newText);
@@ -91,13 +95,13 @@ public class MainWindow extends AnchorPane implements Initializable {
         }
     }
 
-    private void handleMaxTextLengthExceeded(TextField textField, String oldText, String newText) {
+    private void handleMaxTextLengthExceeded(TextField textField, String oldText, String newText, int textLimit) {
         textField.setText(oldText);
         TextField nextTextField = textFieldHandler.getNextField(textField);
         nextTextField.requestFocus();
 
         // send the new character to the next text field and only if it can.
-        if (nextTextField.getText().length() < MAX_TEXT_LENGTH) {
+        if (nextTextField.getText().length() < textLimit) {
             nextTextField.setText(String.valueOf(newText.charAt(newText.length() - 1)));
         }
         // Move the cursor so that it is at the end.
