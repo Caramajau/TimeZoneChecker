@@ -10,30 +10,23 @@ public class OrderedFieldHandler<T> {
     }
 
     public T getNextTextField(T currentTextField) {
-        return calculateNextTextField(currentTextField);
-    }
-
-    private T calculateNextTextField(T currentTextField) {
-        int currentIndex = textFields.indexOf(currentTextField);
-
-        if (currentIndex == textFields.size() - 1) {
-            return currentTextField;
-        } else {
-            return textFields.get(currentIndex + 1);
-        }
+        return calculateTextField(currentTextField, 1);
     }
 
     public T getPreviousTextField(T currentTextField) {
-        return calculatePreviousTextField(currentTextField);
+        return calculateTextField(currentTextField, -1);
     }
 
-    private T calculatePreviousTextField(T currentTextField) {
+    private T calculateTextField(T currentTextField, int indexStep) {
         int currentIndex = textFields.indexOf(currentTextField);
+        int newIndex = currentIndex + indexStep;
 
-        if (currentIndex == 0) {
-            return currentTextField;
-        } else {
-            return textFields.get(currentIndex - 1);
+        if (newIndex < 0) {
+            newIndex = 0;
+        } else if (newIndex >= textFields.size()) {
+            newIndex = textFields.size() - 1;
         }
+
+        return textFields.get(newIndex);
     }
 }
