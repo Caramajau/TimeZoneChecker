@@ -24,8 +24,8 @@
             <String fx:value="normal_text" />
             <String fx:value="convert_button" />
          </styleClass></Button>
-      <Label layoutX="502.0" layoutY="16.0" prefHeight="17.0" prefWidth="211.0" styleClass="title_text" text="Select to see converted date" AnchorPane.leftAnchor="502.0" AnchorPane.topAnchor="16.0" />
-      <Label fx:id="convertedDateLabel" layoutX="503.0" layoutY="44.0" prefHeight="30.0" prefWidth="211.0" styleClass="normal_text" text="Enter a time zone." AnchorPane.leftAnchor="502.0" AnchorPane.topAnchor="44.0" />
+      <Label layoutX="502.0" layoutY="16.0" prefHeight="20.0" prefWidth="202.0" styleClass="title_text" text="Select to see converted date" AnchorPane.leftAnchor="512.0" AnchorPane.topAnchor="16.0" />
+      <Label fx:id="convertedDateLabel" layoutX="503.0" layoutY="44.0" prefHeight="30.0" prefWidth="202.0" styleClass="normal_text" text="Enter a time zone." AnchorPane.leftAnchor="512.0" AnchorPane.topAnchor="44.0" />
       <TextField fx:id="hourTextField" layoutX="16.0" layoutY="44.0" onKeyTyped="#handleHourTextField" prefHeight="30.0" prefWidth="32.0" promptText="00" styleClass="normal_text" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="44.0" />
       <TextField fx:id="minuteTextField" layoutX="60.0" layoutY="44.0" onKeyTyped="#handleMinuteTextField" prefHeight="30.0" prefWidth="32.0" promptText="00" styleClass="normal_text" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="44.0" />
       <Label alignment="CENTER" layoutX="48.0" layoutY="44.0" prefHeight="30.0" prefWidth="14.0" styleClass="normal_text" text=":" />
