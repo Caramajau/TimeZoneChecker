@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="100.0" prefWidth="720.0" stylesheets="@main_window.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.caramajau.view.MainWindow">
+<AnchorPane prefHeight="100.0" prefWidth="720.0" stylesheets="@main_window.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.caramajau.view.mainwindow.MainWindow">
    <children>
       <ChoiceBox fx:id="timeChoiceBox" layoutX="276.0" layoutY="43.0" prefHeight="30.0" prefWidth="96.0" AnchorPane.leftAnchor="276.0" AnchorPane.topAnchor="43.0">
          <styleClass>

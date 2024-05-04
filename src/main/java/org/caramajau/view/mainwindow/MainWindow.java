@@ -1,4 +1,4 @@
-package org.caramajau.view;
+package org.caramajau.view.mainwindow;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
