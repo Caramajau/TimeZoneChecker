@@ -12,13 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.caramajau.model.TimeZoneHandler;
 import org.caramajau.model.TimeZoneOffsets;
+import org.caramajau.view.utility.TextFieldHandler;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -36,13 +37,12 @@ public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private Button convertButton;
 
-    private final HashMap<TextField, TextField> getNextTimeTextField = new HashMap<>();
-    private final HashMap<TextField, TextField> getPreviousTimeTextField = new HashMap<>();
-
     private String selectedTimeZone = TimeZoneHandler.getNoSelectedTimeZoneString();
     private int selectedHour = TimeZoneHandler.getDefaultTime().getHour();
     private int selectedMinute = TimeZoneHandler.getDefaultTime().getMinute();
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
+
+    private TextFieldHandler textFieldHandler;
 
     private static final int MAX_TEXT_LENGTH = 2;
     private static final int MAX_HOUR = 23;
@@ -50,10 +50,10 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        getNextTimeTextField.put(hourTextField, minuteTextField);
-        getNextTimeTextField.put(minuteTextField, minuteTextField);
-        getPreviousTimeTextField.put(hourTextField, hourTextField);
-        getPreviousTimeTextField.put(minuteTextField, hourTextField);
+        List<TextField> textFields = new ArrayList<>();
+        textFields.add(hourTextField);
+        textFields.add(minuteTextField);
+        textFieldHandler = new TextFieldHandler(textFields);
 
         List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviationsAsString();
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
@@ -93,7 +93,7 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     private void handleMaxTextLengthExceeded(TextField textField, String oldText, String newText) {
         textField.setText(oldText);
-        TextField nextTextField = getNextTimeTextField.get(textField);
+        TextField nextTextField = textFieldHandler.getNextTextField(textField);
         nextTextField.requestFocus();
 
         // send the new character to the next text field and only if it can.
@@ -106,7 +106,7 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     private void handleEmptyText(TextField textField, String newText) {
         textField.setText(newText);
-        TextField previousTextField = getPreviousTimeTextField.get(textField);
+        TextField previousTextField = textFieldHandler.getPreviousTextField(textField);
         previousTextField.requestFocus();
         previousTextField.end();
     }
