@@ -2,15 +2,12 @@ package org.caramajau.model.timezonehandling;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 
 public class DateHandler {
     private String selectedTimeZone = TimeZoneHandler.getNoSelectedTimeZoneString();
-    LocalTime selectedTime = TimeZoneHandler.getDefaultTime();
+    private LocalTime selectedTime = TimeZoneHandler.getDefaultTime();
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
-
-    public String getSelectedTimeZone() {
-        return selectedTimeZone;
-    }
 
     public void setSelectedTimeZone(String selectedTimeZone) {
         this.selectedTimeZone = selectedTimeZone;
@@ -32,10 +29,6 @@ public class DateHandler {
         selectedTime = LocalTime.of(selectedTime.getHour(), selectedMinute);
     }
 
-    public LocalTime getSelectedTime() {
-        return selectedTime;
-    }
-
     public LocalDate getSelectedDate() {
         return selectedDate;
     }
@@ -46,5 +39,9 @@ public class DateHandler {
 
     public boolean noTimeZoneSelected() {
         return selectedTimeZone.equals(TimeZoneHandler.getNoSelectedTimeZoneString());
+    }
+
+    public ZonedDateTime getCompleteSelectedDate() {
+        return TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
     }
 }

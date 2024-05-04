@@ -17,8 +17,6 @@ import org.caramajau.model.utility.DigitInStringChecker;
 import org.caramajau.view.utility.TextFieldHandler;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -126,11 +124,7 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     @FXML
     private void handleConvertButtonAction() {
-        LocalDate selectedDate = dateHandler.getSelectedDate();
-        String selectedTimeZone = dateHandler.getSelectedTimeZone();
-
-        LocalTime selectedTime = dateHandler.getSelectedTime();
-        ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
+        ZonedDateTime newDate = dateHandler.getCompleteSelectedDate();
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
         String formattedDate = newDate.format(dateFormatter);
