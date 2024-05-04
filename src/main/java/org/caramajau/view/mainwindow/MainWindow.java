@@ -10,6 +10,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import org.caramajau.model.timezonehandling.DateHandler;
 import org.caramajau.model.timezonehandling.TimeZoneHandler;
 import org.caramajau.model.timezonehandling.TimeZoneOffsets;
 import org.caramajau.model.utility.DigitInStringChecker;
@@ -38,11 +39,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private Button convertButton;
 
-    private String selectedTimeZone = TimeZoneHandler.getNoSelectedTimeZoneString();
-    private int selectedHour = TimeZoneHandler.getDefaultTime().getHour();
-    private int selectedMinute = TimeZoneHandler.getDefaultTime().getMinute();
-    private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
-
+    private DateHandler dateHandler;
     private TextFieldHandler textFieldHandler;
 
     private static final int MAX_TEXT_LENGTH = 2;
@@ -52,6 +49,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         textFieldHandler = createTextFieldHandler();
+        dateHandler = new DateHandler();
 
         List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviationsAsString();
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);
@@ -59,11 +57,11 @@ public class MainWindow extends AnchorPane implements Initializable {
         timeChoiceBox.setItems(allTimeZonesObservableList);
         timeChoiceBox.setOnAction(event -> handleChoiceBoxAction());
 
-        datePicker.setValue(selectedDate);
+        datePicker.setValue(dateHandler.getSelectedDate());
 
         convertButton.setDisable(true);
-        initializeTimeTextField(selectedHour, hourTextField, MAX_HOUR);
-        initializeTimeTextField(selectedMinute, minuteTextField, MAX_MINUTE);
+        initializeTimeTextField(dateHandler.getSelectedHour(), hourTextField, MAX_HOUR);
+        initializeTimeTextField(dateHandler.getSelectedMinute(), minuteTextField, MAX_MINUTE);
     }
 
     private TextFieldHandler createTextFieldHandler() {
@@ -84,17 +82,18 @@ public class MainWindow extends AnchorPane implements Initializable {
     // For some reason the onAction doesn't exist in SceneBuilder
     private void handleChoiceBoxAction() {
         // Can only convert after having set to a valid time zone.
-        if (selectedTimeZone.equals(TimeZoneHandler.getNoSelectedTimeZoneString())) {
+        // TODO Move to DateHandler class.
+        if (dateHandler.getSelectedTimeZone().equals(TimeZoneHandler.getNoSelectedTimeZoneString())) {
             convertButton.setDisable(false);
         }
         String selectedTimeZoneAbbreviation = timeChoiceBox.getValue();
         TimeZoneOffsets selectedTimeZoneOffset = TimeZoneOffsets.fromString(selectedTimeZoneAbbreviation);
-        selectedTimeZone = TimeZoneHandler.getTimeZoneBasedOnOffset(selectedTimeZoneOffset);
+        dateHandler.setSelectedTimeZone(TimeZoneHandler.getTimeZoneBasedOnOffset(selectedTimeZoneOffset));
     }
 
     @FXML
     private void handleDatePickAction() {
-        selectedDate = datePicker.getValue();
+        dateHandler.setSelectedDate(datePicker.getValue());
     }
 
     @FXML
@@ -103,11 +102,13 @@ public class MainWindow extends AnchorPane implements Initializable {
 
         boolean isAllDigit = DigitInStringChecker.isAllDigit(selectedHourString);
 
+        int selectedHour;
         if (isAllDigit && !selectedHourString.isEmpty()) {
             selectedHour = Integer.parseInt(selectedHourString);
         } else {
             selectedHour = 0;
         }
+        dateHandler.setSelectedHour(selectedHour);
     }
 
     @FXML
@@ -115,15 +116,23 @@ public class MainWindow extends AnchorPane implements Initializable {
         String selectedMinuteString = minuteTextField.getText();
         boolean isAllDigit = DigitInStringChecker.isAllDigit(selectedMinuteString);
 
+        int selectedMinute;
         if (isAllDigit && !selectedMinuteString.isEmpty()) {
             selectedMinute = Integer.parseInt(selectedMinuteString);
         } else {
             selectedMinute = 0;
         }
+        dateHandler.setSelectedMinute(selectedMinute);
     }
 
     @FXML
     private void handleConvertButtonAction() {
+        // TODO create method for getting local time in DateHandler class.
+        int selectedHour = dateHandler.getSelectedHour();
+        int selectedMinute = dateHandler.getSelectedMinute();
+        LocalDate selectedDate = dateHandler.getSelectedDate();
+        String selectedTimeZone = dateHandler.getSelectedTimeZone();
+
         LocalTime selectedTime = LocalTime.of(selectedHour, selectedMinute);
         ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
 
