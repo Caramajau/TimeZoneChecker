@@ -39,4 +39,8 @@ public class DateHandler {
     public void setSelectedDate(LocalDate selectedDate) {
         this.selectedDate = selectedDate;
     }
+
+    public boolean noTimeZoneSelected() {
+        return selectedTimeZone.equals(TimeZoneHandler.getNoSelectedTimeZoneString());
+    }
 }

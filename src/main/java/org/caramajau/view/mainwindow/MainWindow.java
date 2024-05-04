@@ -82,8 +82,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     // For some reason the onAction doesn't exist in SceneBuilder
     private void handleChoiceBoxAction() {
         // Can only convert after having set to a valid time zone.
-        // TODO Move to DateHandler class.
-        if (dateHandler.getSelectedTimeZone().equals(TimeZoneHandler.getNoSelectedTimeZoneString())) {
+        if (dateHandler.noTimeZoneSelected()) {
             convertButton.setDisable(false);
         }
         String selectedTimeZoneAbbreviation = timeChoiceBox.getValue();
