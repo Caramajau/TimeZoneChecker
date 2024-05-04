@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     private int selectedMinute = TimeZoneHandler.getDefaultTime().getMinute();
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
 
-    private TextFieldHandler textFieldHandler;
+    private TextFieldHandler<TextField> textFieldHandler;
 
     private static final int MAX_TEXT_LENGTH = 2;
     private static final int MAX_HOUR = 23;
@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane implements Initializable {
         List<TextField> textFields = new ArrayList<>();
         textFields.add(hourTextField);
         textFields.add(minuteTextField);
-        textFieldHandler = new TextFieldHandler(textFields);
+        textFieldHandler = new TextFieldHandler<>(textFields);
 
         List<String> allTimeZonesList = TimeZoneHandler.getAllTimeZoneAbbreviationsAsString();
         ObservableList<String> allTimeZonesObservableList = FXCollections.observableArrayList(allTimeZonesList);

@@ -1,21 +1,19 @@
 package org.caramajau.view.utility;
 
-import javafx.scene.control.TextField;
-
 import java.util.List;
 
-public class TextFieldHandler {
-    private final List<TextField> textFields;
+public class TextFieldHandler<T> {
+    private final List<T> textFields;
 
-    public TextFieldHandler(List<TextField> textFields) {
+    public TextFieldHandler(List<T> textFields) {
         this.textFields = textFields;
     }
 
-    public TextField getNextTextField(TextField currentTextField) {
+    public T getNextTextField(T currentTextField) {
         return calculateNextTextField(currentTextField);
     }
 
-    private TextField calculateNextTextField(TextField currentTextField) {
+    private T calculateNextTextField(T currentTextField) {
         int currentIndex = textFields.indexOf(currentTextField);
 
         if (currentIndex == textFields.size() - 1) {
@@ -26,11 +24,11 @@ public class TextFieldHandler {
 
     }
 
-    public TextField getPreviousTextField(TextField currentTextField) {
+    public T getPreviousTextField(T currentTextField) {
         return calculatePreviousTextField(currentTextField);
     }
 
-    private TextField calculatePreviousTextField(TextField currentTextField) {
+    private T calculatePreviousTextField(T currentTextField) {
         int currentIndex = textFields.indexOf(currentTextField);
 
         if (currentIndex == 0) {
