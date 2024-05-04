@@ -79,11 +79,11 @@ public class MainWindow extends AnchorPane implements Initializable {
     private void handleTextFieldChange(TextField textField, String oldText, String newText, int numberLimit) {
         if (!isAllDigit(newText)) {
             textField.setText(oldText);
-        }
-        if (newText.length() > MAX_TEXT_LENGTH) {
+
+        } else if (newText.length() > MAX_TEXT_LENGTH) {
             handleMaxTextLengthExceeded(textField, oldText, newText);
 
-        } else if (newText.isEmpty()){
+        } else if (newText.isEmpty()) {
             handleEmptyText(textField, newText);
 
         } else if (Integer.parseInt(newText) > numberLimit) {
