@@ -12,7 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.caramajau.model.timezonehandling.TimeZoneHandler;
 import org.caramajau.model.timezonehandling.TimeZoneOffsets;
-import org.caramajau.model.utility.OrderedFieldHandler;
+import org.caramajau.model.utility.DigitInStringChecker;
+import org.caramajau.view.utility.TextFieldHandler;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -42,7 +43,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     private int selectedMinute = TimeZoneHandler.getDefaultTime().getMinute();
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
 
-    private OrderedFieldHandler<TextField> textFieldHandler;
+    private TextFieldHandler textFieldHandler;
 
     private static final int MAX_TEXT_LENGTH = 2;
     private static final int MAX_HOUR = 23;
@@ -65,54 +66,19 @@ public class MainWindow extends AnchorPane implements Initializable {
         initializeTimeTextField(selectedMinute, minuteTextField, MAX_MINUTE);
     }
 
-    private OrderedFieldHandler<TextField> createTextFieldHandler() {
+    private TextFieldHandler createTextFieldHandler() {
         List<TextField> textFields = new ArrayList<>();
         textFields.add(hourTextField);
         textFields.add(minuteTextField);
-        return new OrderedFieldHandler<>(textFields);
+        return new TextFieldHandler(textFields);
     }
 
     private void initializeTimeTextField(int selectedHour, TextField timeTextField, int maxTime) {
         String formattedHour = String.format("%02d", selectedHour);
         timeTextField.setPromptText(formattedHour);
         timeTextField.textProperty().addListener(
-            (observable, oldText, newText) -> handleTextFieldChange(timeTextField, oldText, newText, MAX_TEXT_LENGTH, maxTime)
+            (observable, oldText, newText) -> textFieldHandler.handleTextFieldChange(timeTextField, oldText, newText, MAX_TEXT_LENGTH, maxTime)
         );
-    }
-
-    private void handleTextFieldChange(TextField textField, String oldText, String newText, int textLimit, int numberLimit) {
-        if (!isAllDigit(newText)) {
-            textField.setText(oldText);
-
-        } else if (newText.length() > textLimit) {
-            handleMaxTextLengthExceeded(textField, oldText, newText, textLimit);
-
-        } else if (newText.isEmpty()) {
-            handleEmptyText(textField, newText);
-
-        } else if (Integer.parseInt(newText) > numberLimit) {
-            textField.setText(String.valueOf(numberLimit));
-        }
-    }
-
-    private void handleMaxTextLengthExceeded(TextField textField, String oldText, String newText, int textLimit) {
-        textField.setText(oldText);
-        TextField nextTextField = textFieldHandler.getNextField(textField);
-        nextTextField.requestFocus();
-
-        // send the new character to the next text field and only if it can.
-        if (nextTextField.getText().length() < textLimit) {
-            nextTextField.setText(String.valueOf(newText.charAt(newText.length() - 1)));
-        }
-        // Move the cursor so that it is at the end.
-        nextTextField.end();
-    }
-
-    private void handleEmptyText(TextField textField, String newText) {
-        textField.setText(newText);
-        TextField previousTextField = textFieldHandler.getPreviousField(textField);
-        previousTextField.requestFocus();
-        previousTextField.end();
     }
 
     // For some reason the onAction doesn't exist in SceneBuilder
@@ -135,7 +101,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     private void handleHourTextField() {
         String selectedHourString = hourTextField.getText();
 
-        boolean isAllDigit = isAllDigit(selectedHourString);
+        boolean isAllDigit = DigitInStringChecker.isAllDigit(selectedHourString);
 
         if (isAllDigit && !selectedHourString.isEmpty()) {
             selectedHour = Integer.parseInt(selectedHourString);
@@ -147,7 +113,7 @@ public class MainWindow extends AnchorPane implements Initializable {
     @FXML
     private void handleMinuteTextField() {
         String selectedMinuteString = minuteTextField.getText();
-        boolean isAllDigit = isAllDigit(selectedMinuteString);
+        boolean isAllDigit = DigitInStringChecker.isAllDigit(selectedMinuteString);
 
         if (isAllDigit && !selectedMinuteString.isEmpty()) {
             selectedMinute = Integer.parseInt(selectedMinuteString);
@@ -164,14 +130,5 @@ public class MainWindow extends AnchorPane implements Initializable {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");
         String formattedDate = newDate.format(dateFormatter);
         convertedDateLabel.setText("New date: " + formattedDate);
-    }
-
-    private boolean isAllDigit(String stringToTest) {
-        for (char c : stringToTest.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 }
