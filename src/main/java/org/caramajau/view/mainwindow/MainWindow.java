@@ -126,13 +126,10 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     @FXML
     private void handleConvertButtonAction() {
-        // TODO create method for getting local time in DateHandler class.
-        int selectedHour = dateHandler.getSelectedHour();
-        int selectedMinute = dateHandler.getSelectedMinute();
         LocalDate selectedDate = dateHandler.getSelectedDate();
         String selectedTimeZone = dateHandler.getSelectedTimeZone();
 
-        LocalTime selectedTime = LocalTime.of(selectedHour, selectedMinute);
+        LocalTime selectedTime = dateHandler.getSelectedTime();
         ZonedDateTime newDate = TimeZoneHandler.convertToCurrentTimeZone(selectedDate, selectedTime, selectedTimeZone);
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd");

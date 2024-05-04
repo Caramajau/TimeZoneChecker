@@ -1,11 +1,11 @@
 package org.caramajau.model.timezonehandling;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class DateHandler {
     private String selectedTimeZone = TimeZoneHandler.getNoSelectedTimeZoneString();
-    private int selectedHour = TimeZoneHandler.getDefaultTime().getHour();
-    private int selectedMinute = TimeZoneHandler.getDefaultTime().getMinute();
+    LocalTime selectedTime = TimeZoneHandler.getDefaultTime();
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
 
     public String getSelectedTimeZone() {
@@ -17,19 +17,23 @@ public class DateHandler {
     }
 
     public int getSelectedHour() {
-        return selectedHour;
+        return selectedTime.getHour();
     }
 
     public void setSelectedHour(int selectedHour) {
-        this.selectedHour = selectedHour;
+        selectedTime = LocalTime.of(selectedHour, selectedTime.getMinute());
     }
 
     public int getSelectedMinute() {
-        return selectedMinute;
+        return selectedTime.getMinute();
     }
 
     public void setSelectedMinute(int selectedMinute) {
-        this.selectedMinute = selectedMinute;
+        selectedTime = LocalTime.of(selectedTime.getHour(), selectedMinute);
+    }
+
+    public LocalTime getSelectedTime() {
+        return selectedTime;
     }
 
     public LocalDate getSelectedDate() {
