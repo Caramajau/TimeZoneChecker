@@ -2,10 +2,10 @@ package org.caramajau.view.utility;
 
 import java.util.List;
 
-public class TextFieldHandler<T> {
+public class OrderedFieldHandler<T> {
     private final List<T> textFields;
 
-    public TextFieldHandler(List<T> textFields) {
+    public OrderedFieldHandler(List<T> textFields) {
         this.textFields = textFields;
     }
 
