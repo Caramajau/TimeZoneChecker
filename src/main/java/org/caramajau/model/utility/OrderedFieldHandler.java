@@ -3,30 +3,30 @@ package org.caramajau.model.utility;
 import java.util.List;
 
 public class OrderedFieldHandler<T> {
-    private final List<T> textFields;
+    private final List<T> fields;
 
-    public OrderedFieldHandler(List<T> textFields) {
-        this.textFields = textFields;
+    public OrderedFieldHandler(List<T> fields) {
+        this.fields = fields;
     }
 
-    public T getNextTextField(T currentTextField) {
-        return calculateTextField(currentTextField, 1);
+    public T getNextField(T currentField) {
+        return calculateField(currentField, 1);
     }
 
-    public T getPreviousTextField(T currentTextField) {
-        return calculateTextField(currentTextField, -1);
+    public T getPreviousField(T currentField) {
+        return calculateField(currentField, -1);
     }
 
-    private T calculateTextField(T currentTextField, int indexStep) {
-        int currentIndex = textFields.indexOf(currentTextField);
+    private T calculateField(T currentField, int indexStep) {
+        int currentIndex = fields.indexOf(currentField);
         int newIndex = currentIndex + indexStep;
 
         if (newIndex < 0) {
             newIndex = 0;
-        } else if (newIndex >= textFields.size()) {
-            newIndex = textFields.size() - 1;
+        } else if (newIndex >= fields.size()) {
+            newIndex = fields.size() - 1;
         }
 
-        return textFields.get(newIndex);
+        return fields.get(newIndex);
     }
 }

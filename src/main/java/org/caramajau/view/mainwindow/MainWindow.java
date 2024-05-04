@@ -93,7 +93,7 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     private void handleMaxTextLengthExceeded(TextField textField, String oldText, String newText) {
         textField.setText(oldText);
-        TextField nextTextField = textFieldHandler.getNextTextField(textField);
+        TextField nextTextField = textFieldHandler.getNextField(textField);
         nextTextField.requestFocus();
 
         // send the new character to the next text field and only if it can.
@@ -106,7 +106,7 @@ public class MainWindow extends AnchorPane implements Initializable {
 
     private void handleEmptyText(TextField textField, String newText) {
         textField.setText(newText);
-        TextField previousTextField = textFieldHandler.getPreviousTextField(textField);
+        TextField previousTextField = textFieldHandler.getPreviousField(textField);
         previousTextField.requestFocus();
         previousTextField.end();
     }
