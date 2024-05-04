@@ -10,9 +10,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import org.caramajau.model.TimeZoneHandler;
-import org.caramajau.model.TimeZoneOffsets;
-import org.caramajau.view.utility.OrderedFieldHandler;
+import org.caramajau.model.timezonehandling.TimeZoneHandler;
+import org.caramajau.model.timezonehandling.TimeZoneOffsets;
+import org.caramajau.model.utility.OrderedFieldHandler;
 
 import java.net.URL;
 import java.time.LocalDate;

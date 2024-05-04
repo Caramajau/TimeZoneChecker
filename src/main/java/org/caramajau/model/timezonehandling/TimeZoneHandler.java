@@ -1,4 +1,4 @@
-package org.caramajau.model;
+package org.caramajau.model.timezonehandling;
 
 import java.time.Instant;
 import java.time.LocalDate;

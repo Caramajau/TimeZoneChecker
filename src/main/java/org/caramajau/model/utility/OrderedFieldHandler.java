@@ -1,4 +1,4 @@
-package org.caramajau.view.utility;
+package org.caramajau.model.utility;
 
 import java.util.List;
 
@@ -21,7 +21,6 @@ public class OrderedFieldHandler<T> {
         } else {
             return textFields.get(currentIndex + 1);
         }
-
     }
 
     public T getPreviousTextField(T currentTextField) {

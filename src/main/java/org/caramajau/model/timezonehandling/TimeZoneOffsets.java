@@ -1,4 +1,4 @@
-package org.caramajau.model;
+package org.caramajau.model.timezonehandling;
 
 public enum TimeZoneOffsets {
     // Some time zone abbreviations with their offsets
