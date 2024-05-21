@@ -40,6 +40,9 @@ public class DateHandler {
     }
 
     public void setSelectedDate(LocalDate selectedDate) {
+        if (selectedDate == null) {
+            throw new IllegalArgumentException("No date selected since selectedDate input is null");
+        }
         this.selectedDate = selectedDate;
     }
 
