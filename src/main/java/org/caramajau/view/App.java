@@ -10,11 +10,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class App extends Application {
+public class App extends Application implements IApp {
     // For Maven-JavaFX needs to be relative to where this class is.
     private static final String FXML_FILE_PATH = "main_window.fxml";
     private static final String ICON_FILE_PATH = "clock_icon.png";
     private static final Image clockIcon = new Image(Objects.requireNonNull(App.class.getResourceAsStream(ICON_FILE_PATH)));
+
     @Override
     public void start(Stage primaryStage) {
         Parent root;
@@ -37,10 +38,12 @@ public class App extends Application {
         }
     }
 
+    @Override
     public void startView() {
         launch();
     }
 
+    @Override
     public void startView(String[] args) {
         launch(args);
     }
