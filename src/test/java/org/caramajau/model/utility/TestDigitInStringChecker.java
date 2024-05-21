@@ -12,22 +12,22 @@ class TestDigitInStringChecker {
     private static final String EMPTY_STRING = "";
 
     @Test
-    void testIsAllDigitWithValidStringReturnsTrue() {
+    void testIsAllDigitGivenValidStringReturnsTrue() {
         assertTrue(DigitInStringChecker.isAllDigit(VALID_STRING_WITH_DIGITS));
     }
 
     @Test
-    void testIsAllDigitWithInvalidStringReturnsFalse() {
+    void testIsAllDigitGivenInvalidStringReturnsFalse() {
         assertFalse(DigitInStringChecker.isAllDigit(INVALID_STRING_WITH_DIGITS));
     }
 
     @Test
-    void testIsAllDigitWithInvalidStringWithoutDigitsReturnsFalse() {
+    void testIsAllDigitGivenInvalidStringWithoutDigitsReturnsFalse() {
         assertFalse(DigitInStringChecker.isAllDigit(INVALID_STRING_WITHOUT_DIGITS));
     }
 
     @Test
-    void testIsAllDigitWithEmptyStringReturnsTrue() {
+    void testIsAllDigitGivenEmptyStringReturnsTrue() {
         assertTrue(DigitInStringChecker.isAllDigit(EMPTY_STRING));
     }
 }
