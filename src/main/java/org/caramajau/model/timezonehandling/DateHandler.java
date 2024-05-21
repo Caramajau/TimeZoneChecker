@@ -18,6 +18,9 @@ public class DateHandler {
     }
 
     public void setSelectedHour(int selectedHour) {
+        if (selectedHour < 0 || selectedHour > 23) {
+            throw new IllegalArgumentException("Invalid hour: " + selectedHour);
+        }
         selectedTime = LocalTime.of(selectedHour, selectedTime.getMinute());
     }
 
@@ -26,6 +29,9 @@ public class DateHandler {
     }
 
     public void setSelectedMinute(int selectedMinute) {
+        if (selectedMinute < 0 || selectedMinute > 59) {
+            throw new IllegalArgumentException("Invalid minute: " + selectedMinute);
+        }
         selectedTime = LocalTime.of(selectedTime.getHour(), selectedMinute);
     }
 
