@@ -9,6 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TestTimeZoneHandler {
     // Tests for getNoSelectedTimeZoneString
@@ -58,5 +59,12 @@ class TestTimeZoneHandler {
     void testGetDefaultDateReturnsCurrentDate() {
         LocalDate defaultDate = TimeZoneHandler.getDefaultDate();
         assertEquals(LocalDate.now(), defaultDate);
+    }
+
+    // Tests for getTimeZoneBasedOnOffset
+    @Test
+    void testGetTimeZoneBasedOnOffsetGivenNullOffsetThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class,
+                () -> TimeZoneHandler.getTimeZoneBasedOnOffset(null));
     }
 }

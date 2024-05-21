@@ -22,6 +22,9 @@ public class TimeZoneHandler {
     private TimeZoneHandler() {}
 
     static String getTimeZoneBasedOnOffset(TimeZoneOffsets offset) {
+        if (offset == null) {
+            throw new IllegalArgumentException("No time zone selected since offset is null");
+        }
         for (String timeZone : AllTimeZones) {
             ZoneOffset zoneOffset = getZoneOffset(Instant.now(), timeZone);
             if (zoneOffset.getTotalSeconds() == offset.getOffset() * 3600) {
