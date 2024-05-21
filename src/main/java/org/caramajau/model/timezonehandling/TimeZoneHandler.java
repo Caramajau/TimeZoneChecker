@@ -14,6 +14,7 @@ public class TimeZoneHandler {
     private static final List<String> AllTimeZones = createAllTimeZones();
     private static final List<TimeZoneOffsets> AllTimeZonesAbbreviations = createAllTimeZoneAbbreviations();
     private static final List<String> AllTimeZonesAbbreviationsAsString = createAllTimeZoneAbbreviationsAsString();
+
     private static final String NO_SELECTED_TIME_ZONE_STRING = "NaN";
     private static final LocalTime defaultTime = LocalTime.of(0,0);
     private static final LocalDate defaultDate = LocalDate.now();
@@ -21,7 +22,7 @@ public class TimeZoneHandler {
     private TimeZoneHandler() {}
 
     public static String getTimeZoneBasedOnOffset(TimeZoneOffsets offset) {
-        for (String timeZone : ZoneId.getAvailableZoneIds()) {
+        for (String timeZone : AllTimeZones) {
             ZoneOffset zoneOffset = getZoneOffset(Instant.now(), timeZone);
             if (zoneOffset.getTotalSeconds() == offset.getOffset() * 3600) {
                 return timeZone;
@@ -47,14 +48,6 @@ public class TimeZoneHandler {
         return inputDateTime.withZoneSameInstant(currentZone);
     }
 
-    public static ZonedDateTime convertToCurrentTimeZone(LocalDate inputDate, String inputTimeZone) {
-        return convertToCurrentTimeZone(inputDate, defaultTime, inputTimeZone);
-    }
-
-    public static ZonedDateTime convertToCurrentTimeZone(LocalTime inputTime, String inputTimeZone) {
-        return convertToCurrentTimeZone(defaultDate, inputTime, inputTimeZone);
-    }
-
     private static List<String> createAllTimeZones() {
         Set<String> allTimeZonesSet = ZoneId.getAvailableZoneIds();
         ArrayList<String> allTimeZonesList = new ArrayList<>(allTimeZonesSet);
@@ -73,14 +66,6 @@ public class TimeZoneHandler {
             allTimeZonesAbbreviationsAsStrings.add(timeZone.toString());
         }
         return allTimeZonesAbbreviationsAsStrings;
-    }
-
-    public static List<String> getAllTimeZones() {
-        return new ArrayList<>(AllTimeZones);
-    }
-
-    public static List<TimeZoneOffsets> getAllTimeZoneAbbreviations() {
-        return new ArrayList<>(AllTimeZonesAbbreviations);
     }
 
     public static List<String> getAllTimeZoneAbbreviationsAsString() {
