@@ -19,6 +19,7 @@ public class OrderedFieldHandler<T> {
 
     private T calculateField(T currentField, int indexStep) {
         int currentIndex = fields.indexOf(currentField);
+        validateCurrentIndex(currentField, currentIndex);
         int newIndex = currentIndex + indexStep;
 
         if (newIndex < 0) {
@@ -28,5 +29,11 @@ public class OrderedFieldHandler<T> {
         }
 
         return fields.get(newIndex);
+    }
+
+    private static <T> void validateCurrentIndex(T currentField, int currentIndex) {
+        if (currentIndex == -1) {
+            throw new IllegalArgumentException("Field: " + currentField + "not found.");
+        }
     }
 }
