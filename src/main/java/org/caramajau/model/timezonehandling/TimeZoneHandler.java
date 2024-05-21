@@ -36,6 +36,10 @@ public class TimeZoneHandler {
     }
 
     static ZonedDateTime convertToCurrentTimeZone(LocalDate inputDate, LocalTime inputTime, String inputTimeZone) {
+        if (inputTimeZone.equals(NO_SELECTED_TIME_ZONE_STRING)) {
+            throw new IllegalArgumentException("No time zone selected since inputTimeZone is " + inputTimeZone);
+        }
+
         ZoneId inputTimeZoneId = ZoneId.of(inputTimeZone);
 
         // Combine the input date and time into a ZonedDateTime object
