@@ -9,8 +9,8 @@ public class DateHandler {
     private LocalTime selectedTime = TimeZoneHandler.getDefaultTime();
     private LocalDate selectedDate = TimeZoneHandler.getDefaultDate();
 
-    public void setSelectedTimeZone(String selectedTimeZone) {
-        this.selectedTimeZone = selectedTimeZone;
+    public void setSelectedTimeZone(TimeZoneOffsets selectedTimeZone) {
+        this.selectedTimeZone = TimeZoneHandler.getTimeZoneBasedOnOffset(selectedTimeZone);
     }
 
     public int getSelectedHour() {

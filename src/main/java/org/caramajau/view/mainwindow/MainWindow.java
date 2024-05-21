@@ -85,7 +85,7 @@ public class MainWindow extends AnchorPane implements Initializable {
         }
         String selectedTimeZoneAbbreviation = timeChoiceBox.getValue();
         TimeZoneOffsets selectedTimeZoneOffset = TimeZoneOffsets.fromString(selectedTimeZoneAbbreviation);
-        dateHandler.setSelectedTimeZone(TimeZoneHandler.getTimeZoneBasedOnOffset(selectedTimeZoneOffset));
+        dateHandler.setSelectedTimeZone(selectedTimeZoneOffset);
     }
 
     @FXML

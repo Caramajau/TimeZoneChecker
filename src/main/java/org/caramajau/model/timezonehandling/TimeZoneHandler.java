@@ -21,7 +21,7 @@ public class TimeZoneHandler {
 
     private TimeZoneHandler() {}
 
-    public static String getTimeZoneBasedOnOffset(TimeZoneOffsets offset) {
+    static String getTimeZoneBasedOnOffset(TimeZoneOffsets offset) {
         for (String timeZone : AllTimeZones) {
             ZoneOffset zoneOffset = getZoneOffset(Instant.now(), timeZone);
             if (zoneOffset.getTotalSeconds() == offset.getOffset() * 3600) {
@@ -35,7 +35,7 @@ public class TimeZoneHandler {
         return ZoneId.of(zoneString).getRules().getOffset(currentTime);
     }
 
-    public static ZonedDateTime convertToCurrentTimeZone(LocalDate inputDate, LocalTime inputTime, String inputTimeZone) {
+    static ZonedDateTime convertToCurrentTimeZone(LocalDate inputDate, LocalTime inputTime, String inputTimeZone) {
         ZoneId inputTimeZoneId = ZoneId.of(inputTimeZone);
 
         // Combine the input date and time into a ZonedDateTime object
