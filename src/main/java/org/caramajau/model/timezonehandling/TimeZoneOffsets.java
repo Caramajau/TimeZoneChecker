@@ -22,7 +22,8 @@ public enum TimeZoneOffsets {
     EET(2),
     EEST(3),
 
-    // Asian time zone(s)
+    // Asian time zones
+    KST(9),
     JST(9);
 
     private final int offset;
